@@ -73,6 +73,32 @@
                         <div class="result-box">
                             <pre id="kerasResult"></pre>
                         </div>
+                        <div class="result-analysis" id="kerasAnalysis">
+                            <div class="analysis-header">Analysis</div>
+                            <div class="analysis-grid">
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Processing Time</span>
+                                    <span class="analysis-value" id="kerasTime">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Words Detected</span>
+                                    <span class="analysis-value" id="kerasWords">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Lines</span>
+                                    <span class="analysis-value" id="kerasLines">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Characters</span>
+                                    <span class="analysis-value" id="kerasChars">-</span>
+                                </div>
+                            </div>
+                            <div class="analysis-features">
+                                <span class="feature-tag" id="kerasUppercase">Uppercase</span>
+                                <span class="feature-tag" id="kerasNumbers">Numbers</span>
+                                <span class="feature-tag" id="kerasSymbols">Symbols</span>
+                            </div>
+                        </div>
                         <button class="copy-button" onclick="copyText('kerasResult')">Copy</button>
                     </div>
 
@@ -86,6 +112,32 @@
                         </div>
                         <div class="result-box">
                             <pre id="doctrResult"></pre>
+                        </div>
+                        <div class="result-analysis" id="doctrAnalysis">
+                            <div class="analysis-header">Analysis</div>
+                            <div class="analysis-grid">
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Processing Time</span>
+                                    <span class="analysis-value" id="doctrTime">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Words Detected</span>
+                                    <span class="analysis-value" id="doctrWords">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Lines</span>
+                                    <span class="analysis-value" id="doctrLines">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Confidence</span>
+                                    <span class="analysis-value" id="doctrConfidence">-</span>
+                                </div>
+                            </div>
+                            <div class="analysis-features">
+                                <span class="feature-tag" id="doctrUppercase">Uppercase</span>
+                                <span class="feature-tag" id="doctrNumbers">Numbers</span>
+                                <span class="feature-tag" id="doctrSymbols">Symbols</span>
+                            </div>
                         </div>
                         <button class="copy-button" onclick="copyText('doctrResult')">Copy</button>
                     </div>
@@ -104,6 +156,11 @@
                 </div>
             </div>
         </main>
+
+        <footer class="about-footer">
+            <p>Built with TensorFlow, Flask, keras-ocr, and docTR</p>
+            <p>&copy; Copyright 2026 by <a href="https://github.com/apollosoftdev" target="_blank">ApexSpire</a></p>
+        </footer>
     </div>
 
     <script>
@@ -185,8 +242,28 @@
                 if (data.error) {
                     showError(data.error);
                 } else {
-                    kerasResult.textContent = data.keras_ocr;
-                    doctrResult.textContent = data.doctr;
+                    // Set text results
+                    kerasResult.textContent = data.keras_ocr.text;
+                    doctrResult.textContent = data.doctr.text;
+
+                    // Set keras-ocr analysis
+                    document.getElementById('kerasTime').textContent = data.keras_ocr.processing_time_ms + ' ms';
+                    document.getElementById('kerasWords').textContent = data.keras_ocr.word_count;
+                    document.getElementById('kerasLines').textContent = data.keras_ocr.line_count;
+                    document.getElementById('kerasChars').textContent = data.keras_ocr.char_count;
+                    updateFeatureTag('kerasUppercase', data.keras_ocr.has_uppercase);
+                    updateFeatureTag('kerasNumbers', data.keras_ocr.has_numbers);
+                    updateFeatureTag('kerasSymbols', data.keras_ocr.has_symbols);
+
+                    // Set docTR analysis
+                    document.getElementById('doctrTime').textContent = data.doctr.processing_time_ms + ' ms';
+                    document.getElementById('doctrWords').textContent = data.doctr.word_count;
+                    document.getElementById('doctrLines').textContent = data.doctr.line_count;
+                    document.getElementById('doctrConfidence').textContent = data.doctr.avg_confidence + '%';
+                    updateFeatureTag('doctrUppercase', data.doctr.has_uppercase);
+                    updateFeatureTag('doctrNumbers', data.doctr.has_numbers);
+                    updateFeatureTag('doctrSymbols', data.doctr.has_symbols);
+
                     resultsSection.style.display = 'block';
                 }
             })
@@ -209,6 +286,17 @@
         function showError(message) {
             errorText.textContent = message;
             errorMessage.style.display = 'block';
+        }
+
+        function updateFeatureTag(elementId, detected) {
+            const element = document.getElementById(elementId);
+            if (detected) {
+                element.classList.add('detected');
+                element.classList.remove('not-detected');
+            } else {
+                element.classList.add('not-detected');
+                element.classList.remove('detected');
+            }
         }
 
         function resetUI() {

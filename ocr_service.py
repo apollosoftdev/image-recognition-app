@@ -3,9 +3,11 @@ OCR Service Module
 Handles image text recognition using both keras-ocr and docTR (TensorFlow-based)
 """
 
+import time
 import keras_ocr
 from doctr.io import DocumentFile
 from doctr.models import ocr_predictor
+from PIL import Image
 
 
 class KerasOCRService:
@@ -15,13 +17,27 @@ class KerasOCRService:
         """Initialize the keras-ocr pipeline with pre-trained models."""
         self.pipeline = keras_ocr.pipeline.Pipeline()
 
-    def extract_text(self, image_path: str) -> str:
-        """Extract text from an image using keras-ocr."""
+    def extract_text(self, image_path: str) -> dict:
+        """Extract text from an image using keras-ocr with detailed analysis."""
+        start_time = time.time()
+
         image = keras_ocr.tools.read(image_path)
         prediction_groups = self.pipeline.recognize([image])
 
+        processing_time = round((time.time() - start_time) * 1000)  # ms
+
         if not prediction_groups or not prediction_groups[0]:
-            return ""
+            return {
+                "text": "",
+                "word_count": 0,
+                "line_count": 0,
+                "char_count": 0,
+                "regions_detected": 0,
+                "processing_time_ms": processing_time,
+                "has_uppercase": False,
+                "has_numbers": False,
+                "has_symbols": False
+            }
 
         predictions = prediction_groups[0]
         sorted_predictions = sorted(
@@ -36,7 +52,19 @@ class KerasOCRService:
             line_text = " ".join(word for word, _ in line_sorted)
             text_lines.append(line_text)
 
-        return "\n".join(text_lines)
+        full_text = "\n".join(text_lines)
+
+        return {
+            "text": full_text,
+            "word_count": len(predictions),
+            "line_count": len(lines),
+            "char_count": len(full_text.replace(" ", "").replace("\n", "")),
+            "regions_detected": len(predictions),
+            "processing_time_ms": processing_time,
+            "has_uppercase": any(c.isupper() for c in full_text),
+            "has_numbers": any(c.isdigit() for c in full_text),
+            "has_symbols": any(not c.isalnum() and c not in ' \n' for c in full_text)
+        }
 
     def _get_x_center(self, box) -> float:
         return sum(point[0] for point in box) / 4
@@ -85,20 +113,49 @@ class DocTRService:
             pretrained=True
         )
 
-    def extract_text(self, image_path: str) -> str:
-        """Extract text from an image using docTR."""
+    def extract_text(self, image_path: str) -> dict:
+        """Extract text from an image using docTR with detailed analysis."""
+        start_time = time.time()
+
         doc = DocumentFile.from_images(image_path)
         result = self.predictor(doc)
 
+        processing_time = round((time.time() - start_time) * 1000)  # ms
+
         lines = []
+        word_count = 0
+        total_confidence = 0
+        confidence_count = 0
+
         for page in result.pages:
             for block in page.blocks:
                 for line in block.lines:
-                    line_text = " ".join(word.value for word in line.words)
+                    words_in_line = []
+                    for word in line.words:
+                        words_in_line.append(word.value)
+                        word_count += 1
+                        if hasattr(word, 'confidence'):
+                            total_confidence += word.confidence
+                            confidence_count += 1
+                    line_text = " ".join(words_in_line)
                     if line_text.strip():
                         lines.append(line_text)
 
-        return "\n".join(lines)
+        full_text = "\n".join(lines)
+        avg_confidence = round((total_confidence / confidence_count * 100), 1) if confidence_count > 0 else 0
+
+        return {
+            "text": full_text,
+            "word_count": word_count,
+            "line_count": len(lines),
+            "char_count": len(full_text.replace(" ", "").replace("\n", "")),
+            "regions_detected": word_count,
+            "processing_time_ms": processing_time,
+            "avg_confidence": avg_confidence,
+            "has_uppercase": any(c.isupper() for c in full_text),
+            "has_numbers": any(c.isdigit() for c in full_text),
+            "has_symbols": any(not c.isalnum() and c not in ' \n' for c in full_text)
+        }
 
 
 # Singleton instances

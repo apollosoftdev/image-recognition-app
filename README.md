@@ -126,7 +126,7 @@ image-recognition-app/
 - Check that the text is not too stylized or artistic
 
 ## Author
-[@apollosoftdev](https://github.com/apollosoftdev)
+[@ApexSpire](https://github.com/apollosoftdev)
 
 ## License
 

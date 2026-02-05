@@ -64,16 +64,37 @@ def upload_file():
         keras_service = get_keras_ocr_service()
         doctr_service = get_doctr_service()
 
-        # Extract text using both engines
-        keras_text = keras_service.extract_text(filepath)
-        doctr_text = doctr_service.extract_text(filepath)
+        # Extract text using both engines (returns dict with analysis)
+        keras_result = keras_service.extract_text(filepath)
+        doctr_result = doctr_service.extract_text(filepath)
 
         # Clean up the uploaded file
         os.remove(filepath)
 
         return jsonify({
-            'keras_ocr': keras_text if keras_text.strip() else '(No text detected)',
-            'doctr': doctr_text if doctr_text.strip() else '(No text detected)'
+            'keras_ocr': {
+                'text': keras_result['text'] if keras_result['text'].strip() else '(No text detected)',
+                'word_count': keras_result['word_count'],
+                'line_count': keras_result['line_count'],
+                'char_count': keras_result['char_count'],
+                'regions_detected': keras_result['regions_detected'],
+                'processing_time_ms': keras_result['processing_time_ms'],
+                'has_uppercase': keras_result['has_uppercase'],
+                'has_numbers': keras_result['has_numbers'],
+                'has_symbols': keras_result['has_symbols']
+            },
+            'doctr': {
+                'text': doctr_result['text'] if doctr_result['text'].strip() else '(No text detected)',
+                'word_count': doctr_result['word_count'],
+                'line_count': doctr_result['line_count'],
+                'char_count': doctr_result['char_count'],
+                'regions_detected': doctr_result['regions_detected'],
+                'processing_time_ms': doctr_result['processing_time_ms'],
+                'avg_confidence': doctr_result['avg_confidence'],
+                'has_uppercase': doctr_result['has_uppercase'],
+                'has_numbers': doctr_result['has_numbers'],
+                'has_symbols': doctr_result['has_symbols']
+            }
         })
 
     except Exception as e:
