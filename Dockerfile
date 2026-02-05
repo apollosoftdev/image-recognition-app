@@ -44,6 +44,7 @@ EXPOSE 5000
 # Set environment variables
 ENV FLASK_APP=app.py
 ENV PYTHONUNBUFFERED=1
+ENV PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK=True
 
 # Run the application
 CMD ["python", "app.py"]

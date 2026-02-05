@@ -233,7 +233,10 @@ class PaddleOCRService:
 
     def __init__(self):
         """Initialize the PaddleOCR with pre-trained models."""
-        self.ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False, show_log=False)
+        import logging
+        # Suppress PaddleOCR logging
+        logging.getLogger('ppocr').setLevel(logging.WARNING)
+        self.ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False)
 
     def extract_text(self, image_path: str) -> dict:
         """Extract text from an image using PaddleOCR with detailed analysis."""
