@@ -142,64 +142,134 @@
                 OCR is a two-stage process: first <strong>detect</strong> where text is located, then <strong>recognize</strong> what the text says.
             </p>
 
-            <div class="ocr-process">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
+            <div class="ocr-pipeline">
+                <!-- Step 1: Input -->
+                <div class="pipeline-card">
+                    <div class="pipeline-header">
+                        <div class="pipeline-number">1</div>
                         <h4>Image Input</h4>
-                        <p>User uploads an image containing text (document, photo, screenshot, etc.)</p>
-                        <div class="step-visual">📷 → 🖼️</div>
+                    </div>
+                    <div class="pipeline-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <p class="pipeline-desc">User uploads an image containing text</p>
+                    <div class="pipeline-examples">PNG, JPG, PDF, Screenshot</div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
                     </div>
                 </div>
 
-                <div class="process-arrow">→</div>
-
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
+                <!-- Step 2: Preprocessing -->
+                <div class="pipeline-card">
+                    <div class="pipeline-header">
+                        <div class="pipeline-number">2</div>
                         <h4>Preprocessing</h4>
-                        <p>Image is resized, normalized, and prepared for the neural network</p>
-                        <div class="step-visual">🖼️ → 📐</div>
+                    </div>
+                    <div class="pipeline-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <p class="pipeline-desc">Image is resized and normalized</p>
+                    <div class="pipeline-examples">Resize, Normalize, Convert</div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
                     </div>
                 </div>
 
-                <div class="process-arrow">→</div>
-
-                <div class="process-step detection">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
+                <!-- Step 3: Detection -->
+                <div class="pipeline-card detection">
+                    <div class="pipeline-header">
+                        <div class="pipeline-number">3</div>
                         <h4>Text Detection</h4>
-                        <p>Neural network finds regions containing text and draws bounding boxes</p>
-                        <div class="step-detail">
-                            <strong>CRAFT</strong> (keras-ocr) or <strong>DBNet</strong> (docTR)
-                        </div>
-                        <div class="step-visual">📐 → 🔲🔲🔲</div>
+                    </div>
+                    <div class="pipeline-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                            <rect x="6" y="6" width="5" height="3" stroke-dasharray="2"></rect>
+                            <rect x="13" y="6" width="5" height="3" stroke-dasharray="2"></rect>
+                            <rect x="6" y="11" width="12" height="3" stroke-dasharray="2"></rect>
+                            <rect x="6" y="16" width="8" height="3" stroke-dasharray="2"></rect>
+                        </svg>
+                    </div>
+                    <p class="pipeline-desc">Find regions containing text</p>
+                    <div class="pipeline-tech">
+                        <span class="tech-tag keras">CRAFT</span>
+                        <span class="tech-tag doctr">DBNet</span>
                     </div>
                 </div>
 
-                <div class="process-arrow">→</div>
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
+                    </div>
+                </div>
 
-                <div class="process-step recognition">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
+                <!-- Step 4: Recognition -->
+                <div class="pipeline-card recognition">
+                    <div class="pipeline-header">
+                        <div class="pipeline-number">4</div>
                         <h4>Text Recognition</h4>
-                        <p>Each detected region is read by CRNN to convert pixels to characters</p>
-                        <div class="step-detail">
-                            <strong>CRNN</strong> with CTC decoding
-                        </div>
-                        <div class="step-visual">🔲 → "Hello"</div>
+                    </div>
+                    <div class="pipeline-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 7V4h16v3"></path>
+                            <path d="M9 20h6"></path>
+                            <path d="M12 4v16"></path>
+                        </svg>
+                    </div>
+                    <p class="pipeline-desc">Convert pixels to characters</p>
+                    <div class="pipeline-tech">
+                        <span class="tech-tag crnn">CRNN + CTC</span>
                     </div>
                 </div>
 
-                <div class="process-arrow">→</div>
-
-                <div class="process-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>Output</h4>
-                        <p>Recognized text is organized by position and returned to the user</p>
-                        <div class="step-visual">"Hello World"</div>
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
                     </div>
+                </div>
+
+                <!-- Step 5: Output -->
+                <div class="pipeline-card output">
+                    <div class="pipeline-header">
+                        <div class="pipeline-number">5</div>
+                        <h4>Text Output</h4>
+                    </div>
+                    <div class="pipeline-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                    </div>
+                    <p class="pipeline-desc">Editable text returned to user</p>
+                    <div class="pipeline-result">"Hello World"</div>
                 </div>
             </div>
         </section>
