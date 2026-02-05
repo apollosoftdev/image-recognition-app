@@ -10,4 +10,5 @@ services:
       - ./ocr_service.py:/app/ocr_service.py
     environment:
       - FLASK_ENV=development
+      - PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK=True
     restart: unless-stopped
