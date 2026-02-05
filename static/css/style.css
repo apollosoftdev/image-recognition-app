@@ -1040,6 +1040,233 @@ main {
     color: #3fb950;
 }
 
+/* Frameworks Section */
+.frameworks-section {
+    margin-bottom: 40px;
+}
+
+.frameworks-section h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.frameworks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.framework-card {
+    background: linear-gradient(135deg, #1c2128 0%, #161b22 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid #30363d;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.framework-card:hover {
+    transform: translateY(-2px);
+}
+
+.framework-card.tensorflow {
+    border-color: #ff9800;
+}
+
+.framework-card.paddle {
+    border-color: #2196f3;
+}
+
+.framework-card.tesseract-fw {
+    border-color: #4caf50;
+}
+
+.framework-card .fw-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+.framework-card.tensorflow .fw-icon {
+    background: linear-gradient(135deg, #ff6f00, #ff9800);
+}
+
+.framework-card.paddle .fw-icon {
+    background: linear-gradient(135deg, #1565c0, #2196f3);
+}
+
+.framework-card.tesseract-fw .fw-icon {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+}
+
+.framework-card .fw-info h4 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.framework-card .fw-info p {
+    color: #8b949e;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* 4 OCR Cards Grid */
+.ocr-comparison-cards.four-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.ocr-compare-card.tesseract {
+    border-top: 4px solid var(--accent-blue);
+}
+
+.ocr-compare-card.paddleocr {
+    border-top: 4px solid var(--accent-pink);
+}
+
+.compare-badge.keras {
+    background: rgba(247, 129, 102, 0.2);
+    color: var(--accent-orange);
+}
+
+.compare-badge.doctr {
+    background: rgba(63, 185, 80, 0.2);
+    color: var(--accent-green);
+}
+
+.compare-badge.tesseract {
+    background: rgba(88, 166, 255, 0.2);
+    color: var(--accent-blue);
+}
+
+.compare-badge.paddleocr {
+    background: rgba(247, 120, 186, 0.2);
+    color: var(--accent-pink);
+}
+
+/* 5 Column Comparison Table */
+.comparison-table.five-col th,
+.comparison-table.five-col td {
+    padding: 12px 15px;
+    font-size: 0.85rem;
+}
+
+.comparison-table .keras-col { color: #f78166; }
+.comparison-table .doctr-col { color: #3fb950; }
+.comparison-table .tesseract-col { color: #58a6ff; }
+.comparison-table .paddle-col { color: #f778ba; }
+
+.comparison-table-container h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ML Layer 4 Engines */
+.frameworks-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.framework-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid #30363d;
+}
+
+.framework-box .fw-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: white;
+}
+
+.framework-box.tensorflow .fw-logo {
+    background: linear-gradient(135deg, #ff6f00, #ff9800);
+}
+
+.framework-box.paddle .fw-logo {
+    background: linear-gradient(135deg, #1565c0, #2196f3);
+}
+
+.framework-box.tesseract-fw .fw-logo {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+}
+
+.framework-box .fw-text {
+    font-size: 0.8rem;
+    color: #c9d1d9;
+    font-weight: 600;
+}
+
+.ocr-engines.four-engines {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.ocr-box.tesseract {
+    border-color: var(--accent-blue);
+}
+
+.ocr-box.paddleocr {
+    border-color: var(--accent-pink);
+}
+
+.ocr-badge.classic {
+    background: rgba(88, 166, 255, 0.2);
+    color: var(--accent-blue);
+}
+
+.ocr-badge.multilang {
+    background: rgba(247, 120, 186, 0.2);
+    color: var(--accent-pink);
+}
+
+@media (max-width: 900px) {
+    .frameworks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ocr-comparison-cards.four-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .ocr-engines.four-engines {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .frameworks-row {
+        flex-wrap: wrap;
+    }
+}
+
 .hierarchy-connector {
     text-align: center;
     margin: 15px 0;

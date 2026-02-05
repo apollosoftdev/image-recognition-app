@@ -595,227 +595,66 @@
             </div>
         </section>
 
-        <!-- TensorFlow vs keras-ocr vs docTR Relationship -->
+        <!-- OCR Engines Comparison -->
         <section class="section">
-            <h2>TensorFlow vs keras-ocr vs docTR</h2>
+            <h2>4 OCR Engines Comparison</h2>
             <p class="section-intro">
-                Understanding how these technologies relate to each other is key to understanding this application's architecture.
+                This application uses <strong>4 different OCR engines</strong> to demonstrate how different architectures and frameworks produce different results on the same input.
             </p>
 
-            <div class="tech-relationship">
-                <!-- Hierarchy Diagram -->
-                <div class="tech-hierarchy">
-                    <div class="tech-level framework">
-                        <div class="tech-level-header">
-                            <span class="tech-level-badge">Framework Layer</span>
-                        </div>
-                        <div class="tech-level-card tensorflow-card">
-                            <div class="card-icon">TF</div>
-                            <div class="card-content">
-                                <h4>TensorFlow</h4>
-                                <p>Deep Learning Framework</p>
-                                <ul>
-                                    <li>Low-level neural network operations</li>
-                                    <li>Tensor computations (GPU/CPU)</li>
-                                    <li>Automatic gradient calculation</li>
-                                    <li>Model training infrastructure</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="hierarchy-connector">
-                            <svg width="100%" height="60" viewBox="0 0 200 60">
-                                <path d="M100 0 L100 20 L40 20 L40 60" stroke="#58a6ff" stroke-width="2" fill="none"/>
-                                <path d="M100 0 L100 20 L160 20 L160 60" stroke="#58a6ff" stroke-width="2" fill="none"/>
-                                <circle cx="40" cy="60" r="4" fill="#f78166"/>
-                                <circle cx="160" cy="60" r="4" fill="#3fb950"/>
-                            </svg>
-                        </div>
-
-                        <div class="tech-level library">
-                            <div class="tech-level-header">
-                                <span class="tech-level-badge">Library Layer</span>
-                            </div>
-                            <div class="library-cards">
-                                <div class="tech-level-card keras-card">
-                                    <div class="card-icon keras">K</div>
-                                    <div class="card-content">
-                                        <h4>keras-ocr</h4>
-                                        <p>Scene Text Recognition</p>
-                                        <ul>
-                                            <li>Built on TensorFlow/Keras</li>
-                                            <li>CRAFT text detector</li>
-                                            <li>CRNN text recognizer</li>
-                                            <li>Pre-trained on scene images</li>
-                                        </ul>
-                                        <div class="card-tag">Optimized for photos</div>
-                                    </div>
-                                </div>
-
-                                <div class="tech-level-card doctr-card">
-                                    <div class="card-icon doctr">D</div>
-                                    <div class="card-content">
-                                        <h4>docTR</h4>
-                                        <p>Document Text Recognition</p>
-                                        <ul>
-                                            <li>Supports TensorFlow & PyTorch</li>
-                                            <li>DBNet text detector</li>
-                                            <li>CRNN text recognizer</li>
-                                            <li>Pre-trained on documents</li>
-                                        </ul>
-                                        <div class="card-tag">Optimized for documents</div>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Framework Layer -->
+            <div class="frameworks-section">
+                <h3>Underlying Frameworks</h3>
+                <div class="frameworks-grid">
+                    <div class="framework-card tensorflow">
+                        <div class="fw-icon">TF</div>
+                        <div class="fw-info">
+                            <h4>TensorFlow</h4>
+                            <p>Google's deep learning framework. Powers keras-ocr and docTR.</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Detailed Comparison Table -->
-                <div class="tech-comparison-detailed">
-                    <h3>Detailed Comparison</h3>
-                    <table class="tech-table">
-                        <thead>
-                            <tr>
-                                <th>Aspect</th>
-                                <th>TensorFlow</th>
-                                <th>keras-ocr</th>
-                                <th>docTR</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Type</strong></td>
-                                <td>ML Framework</td>
-                                <td>OCR Library</td>
-                                <td>OCR Library</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Developer</strong></td>
-                                <td>Google</td>
-                                <td>faustomorales</td>
-                                <td>Mindee</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Purpose</strong></td>
-                                <td>Build & train any neural network</td>
-                                <td>Extract text from scene images</td>
-                                <td>Extract text from documents</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Level</strong></td>
-                                <td>Low-level (foundation)</td>
-                                <td>High-level (application)</td>
-                                <td>High-level (application)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Dependencies</strong></td>
-                                <td>NumPy, CUDA (optional)</td>
-                                <td>TensorFlow, Keras</td>
-                                <td>TensorFlow or PyTorch</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Case Support</strong></td>
-                                <td>N/A</td>
-                                <td class="con">Lowercase only</td>
-                                <td class="pro">Full case support</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Symbol Support</strong></td>
-                                <td>N/A</td>
-                                <td class="con">Limited</td>
-                                <td class="pro">Full support</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Language Support</strong></td>
-                                <td>N/A</td>
-                                <td class="con">English only</td>
-                                <td class="con">English (default)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Key Insights -->
-                <div class="tech-insights">
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                            </svg>
-                        </div>
-                        <div class="insight-content">
-                            <h4>TensorFlow is the Foundation</h4>
-                            <p>Both OCR libraries use TensorFlow under the hood to run their neural networks. TensorFlow handles all the heavy math - matrix operations, GPU acceleration, and gradient calculations.</p>
+                    <div class="framework-card paddle">
+                        <div class="fw-icon">PP</div>
+                        <div class="fw-info">
+                            <h4>PaddlePaddle</h4>
+                            <p>Baidu's deep learning framework. Powers PaddleOCR.</p>
                         </div>
                     </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="3" y1="9" x2="21" y2="9"></line>
-                                <line x1="9" y1="21" x2="9" y2="9"></line>
-                            </svg>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Different Training Data = Different Results</h4>
-                            <p>keras-ocr was trained on street signs and scene photos. docTR was trained on documents and forms. This is why they produce different results on the same image.</p>
-                        </div>
-                    </div>
-                    <div class="insight-card">
-                        <div class="insight-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="16" x2="12" y2="12"></line>
-                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                            </svg>
-                        </div>
-                        <div class="insight-content">
-                            <h4>Limitations are Inherent</h4>
-                            <p>Neither model supports Chinese or non-Latin scripts by default. This requires different model weights trained on those character sets - a fundamental limitation of the pre-trained models.</p>
+                    <div class="framework-card tesseract-fw">
+                        <div class="fw-icon">TS</div>
+                        <div class="fw-info">
+                            <h4>Tesseract</h4>
+                            <p>Google's classic OCR engine with LSTM neural networks.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- keras-ocr vs docTR Comparison -->
-        <section class="section">
-            <h2>keras-ocr vs docTR: Detailed Comparison</h2>
-            <p class="section-intro">
-                This app uses two different OCR engines to demonstrate how different architectures
-                produce different results on the same input.
-            </p>
-
-            <div class="ocr-comparison-cards">
+            <!-- 4 OCR Engine Cards -->
+            <div class="ocr-comparison-cards four-cards">
                 <div class="ocr-compare-card keras">
                     <div class="compare-header">
                         <h3>keras-ocr</h3>
-                        <span class="compare-badge">Scene Text Specialist</span>
+                        <span class="compare-badge keras">Scene Text</span>
                     </div>
                     <div class="compare-body">
                         <div class="compare-section">
-                            <h5>Text Detection</h5>
+                            <h5>Architecture</h5>
                             <div class="compare-detail">
-                                <strong>CRAFT</strong> - Character Region Awareness for Text
-                                <p>Detects individual characters first, then groups them into words.
-                                   Works well with irregular text layouts and rotated text.</p>
+                                <strong>CRAFT</strong> detector + <strong>CRNN</strong> recognizer
                             </div>
                         </div>
                         <div class="compare-section">
-                            <h5>Text Recognition</h5>
-                            <div class="compare-detail">
-                                <strong>CRNN</strong> with attention mechanism
-                                <p>Reads detected text regions character by character.</p>
-                            </div>
+                            <h5>Framework</h5>
+                            <div class="compare-detail">TensorFlow / Keras</div>
                         </div>
                         <div class="compare-section">
                             <h5>Characteristics</h5>
                             <ul class="compare-list">
-                                <li class="con">Outputs lowercase only</li>
-                                <li class="con">Limited punctuation support</li>
-                                <li class="pro">Good with scene text (signs, labels)</li>
-                                <li class="pro">Handles rotated/curved text</li>
+                                <li class="con">Lowercase only</li>
+                                <li class="con">Limited symbols</li>
+                                <li class="pro">Good for photos</li>
+                                <li class="pro">Handles rotated text</li>
                             </ul>
                         </div>
                     </div>
@@ -824,84 +663,216 @@
                 <div class="ocr-compare-card doctr">
                     <div class="compare-header">
                         <h3>docTR</h3>
-                        <span class="compare-badge">Document Specialist</span>
+                        <span class="compare-badge doctr">Documents</span>
                     </div>
                     <div class="compare-body">
                         <div class="compare-section">
-                            <h5>Text Detection</h5>
+                            <h5>Architecture</h5>
                             <div class="compare-detail">
-                                <strong>DBNet</strong> - Differentiable Binarization Network
-                                <p>Uses differentiable binarization for precise text boundary detection.
-                                   Excellent for document layouts with clear text lines.</p>
+                                <strong>DBNet</strong> detector + <strong>CRNN</strong> recognizer
                             </div>
                         </div>
                         <div class="compare-section">
-                            <h5>Text Recognition</h5>
-                            <div class="compare-detail">
-                                <strong>CRNN</strong> with VGG16 backbone
-                                <p>More robust feature extraction with deeper CNN backbone.</p>
-                            </div>
+                            <h5>Framework</h5>
+                            <div class="compare-detail">TensorFlow / PyTorch</div>
                         </div>
                         <div class="compare-section">
                             <h5>Characteristics</h5>
                             <ul class="compare-list">
-                                <li class="pro">Preserves original case (A-Z, a-z)</li>
-                                <li class="pro">Full punctuation support</li>
-                                <li class="pro">Better for documents & books</li>
+                                <li class="pro">Preserves case</li>
+                                <li class="pro">Full punctuation</li>
+                                <li class="pro">Document optimized</li>
                                 <li class="pro">Actively maintained</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ocr-compare-card tesseract">
+                    <div class="compare-header">
+                        <h3>Tesseract</h3>
+                        <span class="compare-badge tesseract">Classic OCR</span>
+                    </div>
+                    <div class="compare-body">
+                        <div class="compare-section">
+                            <h5>Architecture</h5>
+                            <div class="compare-detail">
+                                <strong>LSTM</strong>-based recognition engine
+                            </div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Framework</h5>
+                            <div class="compare-detail">Native C++ / Python wrapper</div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Characteristics</h5>
+                            <ul class="compare-list">
+                                <li class="pro">100+ languages</li>
+                                <li class="pro">Very fast</li>
+                                <li class="pro">Mature & stable</li>
+                                <li class="con">Needs preprocessing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ocr-compare-card paddleocr">
+                    <div class="compare-header">
+                        <h3>PaddleOCR</h3>
+                        <span class="compare-badge paddleocr">Multi-language</span>
+                    </div>
+                    <div class="compare-body">
+                        <div class="compare-section">
+                            <h5>Architecture</h5>
+                            <div class="compare-detail">
+                                <strong>PP-OCRv4</strong> (DB + SVTR)
+                            </div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Framework</h5>
+                            <div class="compare-detail">PaddlePaddle (Baidu)</div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Characteristics</h5>
+                            <ul class="compare-list">
+                                <li class="pro">Chinese optimized</li>
+                                <li class="pro">80+ languages</li>
+                                <li class="pro">High accuracy</li>
+                                <li class="pro">Active development</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Comprehensive Comparison Table -->
             <div class="comparison-table-container">
-                <table class="comparison-table">
+                <h3>Detailed Feature Comparison</h3>
+                <table class="comparison-table five-col">
                     <thead>
                         <tr>
                             <th>Feature</th>
-                            <th>keras-ocr</th>
-                            <th>docTR</th>
+                            <th class="keras-col">keras-ocr</th>
+                            <th class="doctr-col">docTR</th>
+                            <th class="tesseract-col">Tesseract</th>
+                            <th class="paddle-col">PaddleOCR</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td><strong>Developer</strong></td>
+                            <td>faustomorales</td>
+                            <td>Mindee</td>
+                            <td>Google</td>
+                            <td>Baidu</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Framework</strong></td>
+                            <td>TensorFlow</td>
+                            <td>TensorFlow/PyTorch</td>
+                            <td>Native C++</td>
+                            <td>PaddlePaddle</td>
+                        </tr>
+                        <tr>
                             <td><strong>Text Detector</strong></td>
                             <td>CRAFT</td>
-                            <td>DBNet (ResNet-50)</td>
+                            <td>DBNet</td>
+                            <td>Page segmentation</td>
+                            <td>DB / EAST</td>
                         </tr>
                         <tr>
                             <td><strong>Text Recognizer</strong></td>
                             <td>CRNN</td>
                             <td>CRNN (VGG16)</td>
+                            <td>LSTM</td>
+                            <td>SVTR / CRNN</td>
                         </tr>
                         <tr>
                             <td><strong>Case Sensitivity</strong></td>
                             <td class="con">Lowercase only</td>
                             <td class="pro">Preserves case</td>
+                            <td class="pro">Preserves case</td>
+                            <td class="pro">Preserves case</td>
                         </tr>
                         <tr>
-                            <td><strong>Punctuation</strong></td>
+                            <td><strong>Symbol Support</strong></td>
                             <td class="con">Limited</td>
-                            <td class="pro">Full support</td>
+                            <td class="pro">Full</td>
+                            <td class="pro">Full</td>
+                            <td class="pro">Full</td>
                         </tr>
                         <tr>
-                            <td><strong>Best Use Case</strong></td>
-                            <td>Photos with text (signs, labels)</td>
-                            <td>Documents, books, forms</td>
+                            <td><strong>Languages</strong></td>
+                            <td class="con">English</td>
+                            <td>English (default)</td>
+                            <td class="pro">100+</td>
+                            <td class="pro">80+</td>
                         </tr>
                         <tr>
-                            <td><strong>Model Size</strong></td>
-                            <td>~400MB</td>
-                            <td>~300MB</td>
+                            <td><strong>Chinese Support</strong></td>
+                            <td class="con">No</td>
+                            <td class="con">No (default)</td>
+                            <td class="pro">Yes</td>
+                            <td class="pro">Excellent</td>
                         </tr>
                         <tr>
-                            <td><strong>Maintenance</strong></td>
-                            <td class="con">Less active</td>
-                            <td class="pro">Actively maintained</td>
+                            <td><strong>Best For</strong></td>
+                            <td>Scene photos</td>
+                            <td>Documents</td>
+                            <td>Printed text</td>
+                            <td>Multi-language</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td class="pro">Fast</td>
+                            <td>Medium</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Key Insights -->
+            <div class="tech-insights">
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="insight-content">
+                        <h4>Different Frameworks, Different Strengths</h4>
+                        <p>TensorFlow excels at flexibility, PaddlePaddle at Chinese text, and Tesseract at speed. Each framework optimizes for different use cases.</p>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="insight-content">
+                        <h4>Training Data Matters</h4>
+                        <p>keras-ocr trained on street signs, docTR on documents, PaddleOCR on Chinese text. This explains why results vary dramatically.</p>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="insight-content">
+                        <h4>No Perfect Solution</h4>
+                        <p>Each engine has trade-offs. For best results, choose based on your specific use case: documents, photos, speed, or language requirements.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -973,16 +944,18 @@
             <h2>Summary</h2>
             <div class="summary-content">
                 <p>
-                    This application demonstrates modern OCR technology using deep learning.
-                    By comparing <strong>keras-ocr</strong> and <strong>docTR</strong>, we can see how
-                    different neural network architectures produce different results:
+                    This application demonstrates modern OCR technology using <strong>4 different engines</strong>.
+                    By comparing their results, we can see how different architectures and frameworks produce different results:
                 </p>
                 <ul class="summary-list">
-                    <li><strong>keras-ocr</strong> excels at reading text in natural scenes (photos of signs, labels)</li>
-                    <li><strong>docTR</strong> excels at reading structured documents with proper formatting</li>
-                    <li>Both use <strong>CRNN architecture</strong> — the industry standard for text recognition</li>
-                    <li>Both are powered by <strong>TensorFlow</strong>, Google's open-source ML framework</li>
+                    <li><strong>keras-ocr</strong> — Best for scene text (signs, labels in photos)</li>
+                    <li><strong>docTR</strong> — Best for structured documents with proper formatting</li>
+                    <li><strong>Tesseract</strong> — Classic OCR, fast, supports 100+ languages</li>
+                    <li><strong>PaddleOCR</strong> — Chinese-optimized, high accuracy, 80+ languages</li>
                 </ul>
+                <p>
+                    Powered by <strong>TensorFlow</strong>, <strong>PaddlePaddle</strong>, and <strong>Tesseract</strong> frameworks.
+                </p>
                 <div class="summary-cta">
                     <a href="/" class="try-demo-btn">Try the Demo →</a>
                 </div>
@@ -992,7 +965,7 @@
     </div>
 
     <footer class="about-footer">
-        <p>Built with TensorFlow, Flask, keras-ocr, and docTR</p>
+        <p>Built with TensorFlow, PaddlePaddle, Tesseract, and Flask</p>
         <p>&copy; Copyright 2026 by <a href="https://github.com/apollosoftdev" target="_blank">ApexSpire</a></p>
     </footer>
 </body>
