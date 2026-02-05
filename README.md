@@ -27,10 +27,10 @@ A web application that extracts text from images (OCR) using Python, TensorFlow,
 
 ```bash
 # Build and start the container
-docker-compose up --build
+docker compose up --build
 
 # Or run in detached mode
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 The first build will download OCR models (~400MB) and may take several minutes.
@@ -45,7 +45,7 @@ http://localhost:5000
 ### Stop the Application
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ## Alternative: Local Development Setup

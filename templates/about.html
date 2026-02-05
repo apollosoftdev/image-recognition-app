@@ -18,17 +18,333 @@
     </nav>
 
     <div class="container about-page">
+
         <!-- App Overview -->
         <section class="section">
             <h1>About This Application</h1>
             <p class="lead">
-                This web application demonstrates <strong>Optical Character Recognition (OCR)</strong> using
-                deep learning. It extracts text from images using two different TensorFlow-based OCR libraries
-                and compares their results side-by-side.
+                This web application demonstrates <strong>Optical Character Recognition (OCR)</strong> —
+                a technology that extracts text from images using artificial intelligence.
+                Upload any image containing text, and our AI models will read and convert it to editable text.
             </p>
+            <div class="feature-highlights">
+                <div class="feature-item">
+                    <div class="feature-icon">📷</div>
+                    <h4>Image Input</h4>
+                    <p>Upload photos, screenshots, or scanned documents</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <h4>AI Processing</h4>
+                    <p>Deep learning models detect and recognize text</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <h4>Text Output</h4>
+                    <p>Get editable, copyable text results instantly</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚖️</div>
+                    <h4>Compare Results</h4>
+                    <p>See differences between two OCR engines</p>
+                </div>
+            </div>
         </section>
 
-        <!-- Architecture Diagram -->
+        <!-- AI/ML/DL Hierarchy -->
+        <section class="section">
+            <h2>Understanding AI, ML, DL & Neural Networks</h2>
+            <p class="section-intro">
+                Before diving into how this app works, let's understand the hierarchy of artificial intelligence technologies.
+            </p>
+
+            <div class="ai-hierarchy-diagram">
+                <div class="hierarchy-level ai-level">
+                    <div class="level-content">
+                        <div class="level-header">
+                            <span class="level-icon">🧠</span>
+                            <h3>Artificial Intelligence (AI)</h3>
+                        </div>
+                        <p>The broadest concept — machines that can perform tasks that typically require human intelligence</p>
+                        <div class="level-examples">
+                            <span>Examples: Virtual assistants, Game AI, Robotics, Expert systems</span>
+                        </div>
+                    </div>
+
+                    <div class="hierarchy-level ml-level">
+                        <div class="level-content">
+                            <div class="level-header">
+                                <span class="level-icon">📊</span>
+                                <h3>Machine Learning (ML)</h3>
+                            </div>
+                            <p>A subset of AI — systems that learn from data without being explicitly programmed</p>
+                            <div class="level-examples">
+                                <span>Examples: Spam filters, Recommendation systems, Fraud detection</span>
+                            </div>
+                        </div>
+
+                        <div class="hierarchy-level dl-level">
+                            <div class="level-content">
+                                <div class="level-header">
+                                    <span class="level-icon">🔮</span>
+                                    <h3>Deep Learning (DL)</h3>
+                                </div>
+                                <p>A subset of ML — uses neural networks with many layers to learn complex patterns</p>
+                                <div class="level-examples">
+                                    <span>Examples: Image recognition, Speech recognition, Language translation</span>
+                                </div>
+                            </div>
+
+                            <div class="hierarchy-level nn-level">
+                                <div class="level-content">
+                                    <div class="level-header">
+                                        <span class="level-icon">🕸️</span>
+                                        <h3>Neural Networks (NN)</h3>
+                                    </div>
+                                    <p>The foundation of deep learning — inspired by biological neurons in the brain</p>
+                                    <div class="nn-types">
+                                        <div class="nn-type">
+                                            <strong>CNN</strong>
+                                            <span>Convolutional Neural Network</span>
+                                            <small>Best for images</small>
+                                        </div>
+                                        <div class="nn-type">
+                                            <strong>RNN</strong>
+                                            <span>Recurrent Neural Network</span>
+                                            <small>Best for sequences</small>
+                                        </div>
+                                        <div class="nn-type">
+                                            <strong>CRNN</strong>
+                                            <span>CNN + RNN Combined</span>
+                                            <small>Used in this app!</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hierarchy-summary">
+                <h4>Where This App Fits</h4>
+                <p>
+                    This OCR application uses <strong>Deep Learning</strong> with <strong>CRNN (Convolutional Recurrent Neural Network)</strong>
+                    architecture. It combines CNN for extracting visual features from images and RNN for understanding text sequences.
+                </p>
+            </div>
+        </section>
+
+        <!-- How OCR Works -->
+        <section class="section">
+            <h2>How OCR Works: Step by Step</h2>
+            <p class="section-intro">
+                OCR is a two-stage process: first <strong>detect</strong> where text is located, then <strong>recognize</strong> what the text says.
+            </p>
+
+            <div class="ocr-process">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Image Input</h4>
+                        <p>User uploads an image containing text (document, photo, screenshot, etc.)</p>
+                        <div class="step-visual">📷 → 🖼️</div>
+                    </div>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Preprocessing</h4>
+                        <p>Image is resized, normalized, and prepared for the neural network</p>
+                        <div class="step-visual">🖼️ → 📐</div>
+                    </div>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <div class="process-step detection">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Text Detection</h4>
+                        <p>Neural network finds regions containing text and draws bounding boxes</p>
+                        <div class="step-detail">
+                            <strong>CRAFT</strong> (keras-ocr) or <strong>DBNet</strong> (docTR)
+                        </div>
+                        <div class="step-visual">📐 → 🔲🔲🔲</div>
+                    </div>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <div class="process-step recognition">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Text Recognition</h4>
+                        <p>Each detected region is read by CRNN to convert pixels to characters</p>
+                        <div class="step-detail">
+                            <strong>CRNN</strong> with CTC decoding
+                        </div>
+                        <div class="step-visual">🔲 → "Hello"</div>
+                    </div>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Output</h4>
+                        <p>Recognized text is organized by position and returned to the user</p>
+                        <div class="step-visual">"Hello World"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Neural Network Architecture -->
+        <section class="section">
+            <h2>Neural Network Architectures Explained</h2>
+
+            <div class="nn-explanation">
+                <div class="nn-card-large">
+                    <div class="nn-card-header cnn">
+                        <h3>CNN - Convolutional Neural Network</h3>
+                        <span class="nn-badge">For Images</span>
+                    </div>
+                    <div class="nn-card-body">
+                        <p class="nn-description">
+                            CNNs are designed to process visual data. They use <strong>convolution operations</strong>
+                            to automatically learn features like edges, shapes, and patterns from images.
+                        </p>
+                        <div class="nn-how-it-works">
+                            <h5>How it works:</h5>
+                            <div class="cnn-layers">
+                                <div class="cnn-layer">
+                                    <div class="layer-box input">Input</div>
+                                    <span>Raw image pixels</span>
+                                </div>
+                                <div class="layer-arrow">→</div>
+                                <div class="cnn-layer">
+                                    <div class="layer-box conv">Conv</div>
+                                    <span>Detect edges</span>
+                                </div>
+                                <div class="layer-arrow">→</div>
+                                <div class="cnn-layer">
+                                    <div class="layer-box conv">Conv</div>
+                                    <span>Detect shapes</span>
+                                </div>
+                                <div class="layer-arrow">→</div>
+                                <div class="cnn-layer">
+                                    <div class="layer-box conv">Conv</div>
+                                    <span>Detect patterns</span>
+                                </div>
+                                <div class="layer-arrow">→</div>
+                                <div class="cnn-layer">
+                                    <div class="layer-box output">Features</div>
+                                    <span>Visual features</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nn-used-for">
+                            <strong>Used in this app for:</strong> Extracting visual features from text images
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nn-card-large">
+                    <div class="nn-card-header rnn">
+                        <h3>RNN - Recurrent Neural Network</h3>
+                        <span class="nn-badge">For Sequences</span>
+                    </div>
+                    <div class="nn-card-body">
+                        <p class="nn-description">
+                            RNNs process sequential data by maintaining a <strong>memory</strong> of previous inputs.
+                            This makes them ideal for text, where the meaning depends on the order of characters.
+                        </p>
+                        <div class="nn-how-it-works">
+                            <h5>How it works:</h5>
+                            <div class="rnn-flow">
+                                <div class="rnn-cell">
+                                    <div class="cell-box">RNN</div>
+                                    <div class="cell-input">H</div>
+                                    <div class="cell-memory">Memory</div>
+                                </div>
+                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-cell">
+                                    <div class="cell-box">RNN</div>
+                                    <div class="cell-input">e</div>
+                                    <div class="cell-memory">H+Memory</div>
+                                </div>
+                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-cell">
+                                    <div class="cell-box">RNN</div>
+                                    <div class="cell-input">l</div>
+                                    <div class="cell-memory">He+Memory</div>
+                                </div>
+                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-cell">
+                                    <div class="cell-box">RNN</div>
+                                    <div class="cell-input">l</div>
+                                    <div class="cell-memory">Hel+Memory</div>
+                                </div>
+                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-cell">
+                                    <div class="cell-box">RNN</div>
+                                    <div class="cell-input">o</div>
+                                    <div class="cell-memory">"Hello"</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nn-used-for">
+                            <strong>Used in this app for:</strong> Reading character sequences from detected text regions
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nn-card-large featured">
+                    <div class="nn-card-header crnn">
+                        <h3>CRNN - The Best of Both Worlds</h3>
+                        <span class="nn-badge highlight">Used in This App</span>
+                    </div>
+                    <div class="nn-card-body">
+                        <p class="nn-description">
+                            CRNN combines CNN and RNN to handle the complete OCR task:
+                            CNN extracts visual features, RNN reads the sequence of characters.
+                        </p>
+                        <div class="crnn-architecture">
+                            <div class="crnn-stage">
+                                <div class="stage-label">Stage 1: CNN</div>
+                                <div class="stage-box cnn-stage">
+                                    <span>Extract visual features</span>
+                                    <small>VGG16 / ResNet backbone</small>
+                                </div>
+                            </div>
+                            <div class="crnn-arrow">→</div>
+                            <div class="crnn-stage">
+                                <div class="stage-label">Stage 2: RNN</div>
+                                <div class="stage-box rnn-stage">
+                                    <span>Sequence modeling</span>
+                                    <small>Bidirectional LSTM</small>
+                                </div>
+                            </div>
+                            <div class="crnn-arrow">→</div>
+                            <div class="crnn-stage">
+                                <div class="stage-label">Stage 3: CTC</div>
+                                <div class="stage-box ctc-stage">
+                                    <span>Decode to text</span>
+                                    <small>CTC Loss / Decoding</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Architecture -->
         <section class="section diagram-section">
             <h2>Application Architecture</h2>
             <div class="modern-architecture">
@@ -146,15 +462,14 @@
                     <div class="tech-icon tensorflow">TF</div>
                     <h3>TensorFlow</h3>
                     <p>
-                        An open-source machine learning framework developed by Google. It provides
-                        a comprehensive ecosystem for building and deploying ML models. Both keras-ocr
-                        and docTR use TensorFlow as their backend for neural network operations.
+                        Open-source machine learning framework by Google. Provides the computational
+                        backbone for running neural networks efficiently on CPU/GPU.
                     </p>
                     <ul class="tech-features">
-                        <li>Automatic differentiation</li>
+                        <li>Automatic differentiation for training</li>
                         <li>GPU acceleration support</li>
-                        <li>Pre-trained model support</li>
-                        <li>Cross-platform deployment</li>
+                        <li>Pre-trained model ecosystem</li>
+                        <li>Production deployment ready</li>
                     </ul>
                 </div>
 
@@ -162,14 +477,14 @@
                     <div class="tech-icon flask">Fl</div>
                     <h3>Flask</h3>
                     <p>
-                        A lightweight WSGI web application framework in Python. It's designed to make
-                        getting started quick and easy, with the ability to scale up to complex applications.
+                        Lightweight Python web framework. Handles HTTP requests, file uploads,
+                        and serves the web interface with minimal overhead.
                     </p>
                     <ul class="tech-features">
-                        <li>Minimalist and flexible</li>
-                        <li>Built-in development server</li>
-                        <li>RESTful request handling</li>
-                        <li>Jinja2 templating</li>
+                        <li>Simple and minimalist design</li>
+                        <li>RESTful API support</li>
+                        <li>Jinja2 templating engine</li>
+                        <li>Easy to learn and deploy</li>
                     </ul>
                 </div>
 
@@ -177,14 +492,14 @@
                     <div class="tech-icon python">Py</div>
                     <h3>Python</h3>
                     <p>
-                        The primary programming language for this application. Python's rich ecosystem
-                        of ML libraries and simple syntax makes it ideal for AI/ML applications.
+                        The primary programming language. Python's rich ML ecosystem and
+                        readable syntax make it the #1 choice for AI applications.
                     </p>
                     <ul class="tech-features">
-                        <li>Easy to read and write</li>
-                        <li>Extensive ML libraries</li>
-                        <li>Large community support</li>
-                        <li>Cross-platform</li>
+                        <li>Rich ML/AI library ecosystem</li>
+                        <li>Easy to read and maintain</li>
+                        <li>Large developer community</li>
+                        <li>Cross-platform support</li>
                     </ul>
                 </div>
             </div>
@@ -192,7 +507,80 @@
 
         <!-- keras-ocr vs docTR Comparison -->
         <section class="section">
-            <h2>keras-ocr vs docTR Comparison</h2>
+            <h2>keras-ocr vs docTR: Detailed Comparison</h2>
+            <p class="section-intro">
+                This app uses two different OCR engines to demonstrate how different architectures
+                produce different results on the same input.
+            </p>
+
+            <div class="ocr-comparison-cards">
+                <div class="ocr-compare-card keras">
+                    <div class="compare-header">
+                        <h3>keras-ocr</h3>
+                        <span class="compare-badge">Scene Text Specialist</span>
+                    </div>
+                    <div class="compare-body">
+                        <div class="compare-section">
+                            <h5>Text Detection</h5>
+                            <div class="compare-detail">
+                                <strong>CRAFT</strong> - Character Region Awareness for Text
+                                <p>Detects individual characters first, then groups them into words.
+                                   Works well with irregular text layouts and rotated text.</p>
+                            </div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Text Recognition</h5>
+                            <div class="compare-detail">
+                                <strong>CRNN</strong> with attention mechanism
+                                <p>Reads detected text regions character by character.</p>
+                            </div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Characteristics</h5>
+                            <ul class="compare-list">
+                                <li class="con">Outputs lowercase only</li>
+                                <li class="con">Limited punctuation support</li>
+                                <li class="pro">Good with scene text (signs, labels)</li>
+                                <li class="pro">Handles rotated/curved text</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ocr-compare-card doctr">
+                    <div class="compare-header">
+                        <h3>docTR</h3>
+                        <span class="compare-badge">Document Specialist</span>
+                    </div>
+                    <div class="compare-body">
+                        <div class="compare-section">
+                            <h5>Text Detection</h5>
+                            <div class="compare-detail">
+                                <strong>DBNet</strong> - Differentiable Binarization Network
+                                <p>Uses differentiable binarization for precise text boundary detection.
+                                   Excellent for document layouts with clear text lines.</p>
+                            </div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Text Recognition</h5>
+                            <div class="compare-detail">
+                                <strong>CRNN</strong> with VGG16 backbone
+                                <p>More robust feature extraction with deeper CNN backbone.</p>
+                            </div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Characteristics</h5>
+                            <ul class="compare-list">
+                                <li class="pro">Preserves original case (A-Z, a-z)</li>
+                                <li class="pro">Full punctuation support</li>
+                                <li class="pro">Better for documents & books</li>
+                                <li class="pro">Actively maintained</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="comparison-table-container">
                 <table class="comparison-table">
                     <thead>
@@ -205,141 +593,128 @@
                     <tbody>
                         <tr>
                             <td><strong>Text Detector</strong></td>
-                            <td>CRAFT (Character Region Awareness for Text)</td>
-                            <td>DBNet (Differentiable Binarization Network)</td>
+                            <td>CRAFT</td>
+                            <td>DBNet (ResNet-50)</td>
                         </tr>
                         <tr>
                             <td><strong>Text Recognizer</strong></td>
-                            <td>CRNN (Convolutional Recurrent Neural Network)</td>
-                            <td>CRNN with VGG16 backbone</td>
+                            <td>CRNN</td>
+                            <td>CRNN (VGG16)</td>
                         </tr>
                         <tr>
                             <td><strong>Case Sensitivity</strong></td>
                             <td class="con">Lowercase only</td>
-                            <td class="pro">Preserves original case</td>
+                            <td class="pro">Preserves case</td>
                         </tr>
                         <tr>
                             <td><strong>Punctuation</strong></td>
-                            <td class="con">Limited support</td>
-                            <td class="pro">Full punctuation support</td>
+                            <td class="con">Limited</td>
+                            <td class="pro">Full support</td>
                         </tr>
                         <tr>
-                            <td><strong>Best For</strong></td>
-                            <td>Scene text (signs, labels, photos)</td>
-                            <td>Documents, books, printed text</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Maintenance</strong></td>
-                            <td class="con">Less actively maintained</td>
-                            <td class="pro">Actively maintained</td>
+                            <td><strong>Best Use Case</strong></td>
+                            <td>Photos with text (signs, labels)</td>
+                            <td>Documents, books, forms</td>
                         </tr>
                         <tr>
                             <td><strong>Model Size</strong></td>
                             <td>~400MB</td>
                             <td>~300MB</td>
                         </tr>
+                        <tr>
+                            <td><strong>Maintenance</strong></td>
+                            <td class="con">Less active</td>
+                            <td class="pro">Actively maintained</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- OCR Pipeline -->
-        <section class="section">
-            <h2>How OCR Works</h2>
-            <div class="pipeline">
-                <div class="pipeline-step">
-                    <div class="step-number">1</div>
-                    <h3>Image Input</h3>
-                    <p>User uploads an image containing text (document, photo, screenshot)</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-step">
-                    <div class="step-number">2</div>
-                    <h3>Text Detection</h3>
-                    <p>Neural network (CRAFT/DBNet) locates regions containing text in the image</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-step">
-                    <div class="step-number">3</div>
-                    <h3>Text Recognition</h3>
-                    <p>CRNN model reads each detected text region and converts to characters</p>
-                </div>
-                <div class="pipeline-arrow">→</div>
-                <div class="pipeline-step">
-                    <div class="step-number">4</div>
-                    <h3>Output</h3>
-                    <p>Extracted text is returned, organized by position in the original image</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Neural Network Architectures -->
-        <section class="section">
-            <h2>Neural Network Architectures Used</h2>
-            <div class="nn-grid">
-                <div class="nn-card">
-                    <h3>CRAFT (Text Detection)</h3>
-                    <p><em>Character Region Awareness for Text Detection</em></p>
-                    <ul>
-                        <li>Detects individual character regions</li>
-                        <li>Links characters to form words</li>
-                        <li>Works well with curved/rotated text</li>
-                        <li>VGG16-based feature extraction</li>
-                    </ul>
-                </div>
-                <div class="nn-card">
-                    <h3>DBNet (Text Detection)</h3>
-                    <p><em>Differentiable Binarization Network</em></p>
-                    <ul>
-                        <li>ResNet-50 backbone</li>
-                        <li>Differentiable binarization module</li>
-                        <li>Fast and accurate</li>
-                        <li>Better for document layouts</li>
-                    </ul>
-                </div>
-                <div class="nn-card">
-                    <h3>CRNN (Text Recognition)</h3>
-                    <p><em>Convolutional Recurrent Neural Network</em></p>
-                    <ul>
-                        <li>CNN extracts visual features</li>
-                        <li>RNN (LSTM) models sequences</li>
-                        <li>CTC loss for training</li>
-                        <li>Handles variable-length text</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Key Terms -->
+        <!-- Key Terms Glossary -->
         <section class="section">
             <h2>Key Terms Glossary</h2>
-            <div class="glossary">
-                <div class="term">
-                    <h4>OCR (Optical Character Recognition)</h4>
-                    <p>Technology that converts images of text into machine-readable text data.</p>
+            <div class="glossary-grid">
+                <div class="glossary-item">
+                    <div class="glossary-term">OCR</div>
+                    <div class="glossary-def">
+                        <strong>Optical Character Recognition</strong> — Technology that converts images
+                        of text into machine-readable text data.
+                    </div>
                 </div>
-                <div class="term">
-                    <h4>CNN (Convolutional Neural Network)</h4>
-                    <p>A type of neural network designed for processing grid-like data such as images. Uses convolution operations to extract features.</p>
+                <div class="glossary-item">
+                    <div class="glossary-term">CNN</div>
+                    <div class="glossary-def">
+                        <strong>Convolutional Neural Network</strong> — Neural network designed for
+                        processing images using convolution operations to detect features.
+                    </div>
                 </div>
-                <div class="term">
-                    <h4>RNN (Recurrent Neural Network)</h4>
-                    <p>A neural network designed for sequential data. Has memory to process sequences of inputs.</p>
+                <div class="glossary-item">
+                    <div class="glossary-term">RNN</div>
+                    <div class="glossary-def">
+                        <strong>Recurrent Neural Network</strong> — Neural network with memory,
+                        designed to process sequential data like text or time series.
+                    </div>
                 </div>
-                <div class="term">
-                    <h4>LSTM (Long Short-Term Memory)</h4>
-                    <p>A type of RNN that can learn long-term dependencies. Used in CRNN for text sequence modeling.</p>
+                <div class="glossary-item">
+                    <div class="glossary-term">LSTM</div>
+                    <div class="glossary-def">
+                        <strong>Long Short-Term Memory</strong> — Advanced RNN that can learn
+                        long-term dependencies. Solves the vanishing gradient problem.
+                    </div>
                 </div>
-                <div class="term">
-                    <h4>CTC (Connectionist Temporal Classification)</h4>
-                    <p>A loss function used to train networks on sequence-to-sequence problems without requiring aligned data.</p>
+                <div class="glossary-item">
+                    <div class="glossary-term">CRNN</div>
+                    <div class="glossary-def">
+                        <strong>Convolutional Recurrent Neural Network</strong> — Combines CNN
+                        for feature extraction and RNN for sequence modeling. Used in OCR.
+                    </div>
                 </div>
-                <div class="term">
-                    <h4>Pre-trained Model</h4>
-                    <p>A model trained on a large dataset that can be used directly or fine-tuned for specific tasks.</p>
+                <div class="glossary-item">
+                    <div class="glossary-term">CTC</div>
+                    <div class="glossary-def">
+                        <strong>Connectionist Temporal Classification</strong> — Loss function
+                        that allows training on unaligned sequence data. Essential for OCR.
+                    </div>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">Backbone</div>
+                    <div class="glossary-def">
+                        <strong>Feature Extraction Network</strong> — The base CNN (like VGG16 or ResNet)
+                        that extracts features from input images.
+                    </div>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">Pre-trained Model</div>
+                    <div class="glossary-def">
+                        <strong>Transfer Learning</strong> — A model already trained on large datasets,
+                        which can be used directly or fine-tuned for specific tasks.
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- Summary -->
+        <section class="section summary-section">
+            <h2>Summary</h2>
+            <div class="summary-content">
+                <p>
+                    This application demonstrates modern OCR technology using deep learning.
+                    By comparing <strong>keras-ocr</strong> and <strong>docTR</strong>, we can see how
+                    different neural network architectures produce different results:
+                </p>
+                <ul class="summary-list">
+                    <li><strong>keras-ocr</strong> excels at reading text in natural scenes (photos of signs, labels)</li>
+                    <li><strong>docTR</strong> excels at reading structured documents with proper formatting</li>
+                    <li>Both use <strong>CRNN architecture</strong> — the industry standard for text recognition</li>
+                    <li>Both are powered by <strong>TensorFlow</strong>, Google's open-source ML framework</li>
+                </ul>
+                <div class="summary-cta">
+                    <a href="/" class="try-demo-btn">Try the Demo →</a>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <footer class="about-footer">
