@@ -125,6 +125,9 @@ image-recognition-app/
 - Try with higher resolution images
 - Check that the text is not too stylized or artistic
 
+## Author
+[@apollosoftdev](https://github.com/apollosoftdev)
+
 ## License
 
 MIT License
