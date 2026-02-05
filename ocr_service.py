@@ -250,7 +250,7 @@ class PaddleOCRService:
         start_time = time.time()
 
         try:
-            result = self.ocr.predict(input=image_path)
+            result = self.ocr.predict(image_path)
 
             processing_time = round((time.time() - start_time) * 1000)  # ms
 
