@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - OCR Technologies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">OCR Demo</a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Demo</a></li>
+                <li><a href="/about" class="nav-link active">About & Technologies</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container about-page">
+        <!-- App Overview -->
+        <section class="section">
+            <h1>About This Application</h1>
+            <p class="lead">
+                This web application demonstrates <strong>Optical Character Recognition (OCR)</strong> using
+                deep learning. It extracts text from images using two different TensorFlow-based OCR libraries
+                and compares their results side-by-side.
+            </p>
+        </section>
+
+        <!-- Architecture Diagram -->
+        <section class="section diagram-section">
+            <h2>Application Architecture</h2>
+            <div class="modern-architecture">
+                <!-- User/Browser Layer -->
+                <div class="arch-layer user-layer">
+                    <div class="layer-header">
+                        <span class="layer-icon">🌐</span>
+                        <span class="layer-title">Frontend (Browser)</span>
+                    </div>
+                    <div class="layer-content">
+                        <div class="tech-box html">
+                            <span class="tech-icon-small">📄</span>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="tech-box css">
+                            <span class="tech-icon-small">🎨</span>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="tech-box js">
+                            <span class="tech-icon-small">⚡</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="tech-box fetch">
+                            <span class="tech-icon-small">🔄</span>
+                            <span>Fetch API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="arch-arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-label">HTTP Request / Response</div>
+                    <div class="arrow-head">▼</div>
+                </div>
+
+                <!-- Backend Layer -->
+                <div class="arch-layer backend-layer">
+                    <div class="layer-header">
+                        <span class="layer-icon">🐍</span>
+                        <span class="layer-title">Backend (Python)</span>
+                    </div>
+                    <div class="layer-content">
+                        <div class="tech-box flask">
+                            <span class="tech-icon-small">🌶️</span>
+                            <span>Flask</span>
+                        </div>
+                        <div class="tech-box werkzeug">
+                            <span class="tech-icon-small">⚙️</span>
+                            <span>Werkzeug</span>
+                        </div>
+                        <div class="tech-box pillow">
+                            <span class="tech-icon-small">🖼️</span>
+                            <span>Pillow</span>
+                        </div>
+                        <div class="tech-box ocr-service">
+                            <span class="tech-icon-small">📝</span>
+                            <span>OCR Service</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="arch-arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-label">Image Processing</div>
+                    <div class="arrow-head">▼</div>
+                </div>
+
+                <!-- ML Layer -->
+                <div class="arch-layer ml-layer">
+                    <div class="layer-header">
+                        <span class="layer-icon">🧠</span>
+                        <span class="layer-title">Machine Learning Layer</span>
+                    </div>
+                    <div class="layer-content ml-content">
+                        <div class="tensorflow-box">
+                            <span class="tf-logo">TF</span>
+                            <span class="tf-text">TensorFlow 2.x</span>
+                        </div>
+                        <div class="ocr-engines">
+                            <div class="ocr-box keras-ocr">
+                                <div class="ocr-name">keras-ocr</div>
+                                <div class="ocr-detail">CRAFT + CRNN</div>
+                                <div class="ocr-badge scene">Scene Text</div>
+                            </div>
+                            <div class="ocr-box doctr">
+                                <div class="ocr-name">docTR</div>
+                                <div class="ocr-detail">DBNet + CRNN</div>
+                                <div class="ocr-badge doc">Documents</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output -->
+                <div class="arch-arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-label">Extracted Text</div>
+                    <div class="arrow-head">▼</div>
+                </div>
+
+                <div class="arch-output">
+                    <span class="output-icon">✨</span>
+                    <span class="output-text">OCR Results Comparison</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="section">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon tensorflow">TF</div>
+                    <h3>TensorFlow</h3>
+                    <p>
+                        An open-source machine learning framework developed by Google. It provides
+                        a comprehensive ecosystem for building and deploying ML models. Both keras-ocr
+                        and docTR use TensorFlow as their backend for neural network operations.
+                    </p>
+                    <ul class="tech-features">
+                        <li>Automatic differentiation</li>
+                        <li>GPU acceleration support</li>
+                        <li>Pre-trained model support</li>
+                        <li>Cross-platform deployment</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon flask">Fl</div>
+                    <h3>Flask</h3>
+                    <p>
+                        A lightweight WSGI web application framework in Python. It's designed to make
+                        getting started quick and easy, with the ability to scale up to complex applications.
+                    </p>
+                    <ul class="tech-features">
+                        <li>Minimalist and flexible</li>
+                        <li>Built-in development server</li>
+                        <li>RESTful request handling</li>
+                        <li>Jinja2 templating</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon python">Py</div>
+                    <h3>Python</h3>
+                    <p>
+                        The primary programming language for this application. Python's rich ecosystem
+                        of ML libraries and simple syntax makes it ideal for AI/ML applications.
+                    </p>
+                    <ul class="tech-features">
+                        <li>Easy to read and write</li>
+                        <li>Extensive ML libraries</li>
+                        <li>Large community support</li>
+                        <li>Cross-platform</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- keras-ocr vs docTR Comparison -->
+        <section class="section">
+            <h2>keras-ocr vs docTR Comparison</h2>
+            <div class="comparison-table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>keras-ocr</th>
+                            <th>docTR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Text Detector</strong></td>
+                            <td>CRAFT (Character Region Awareness for Text)</td>
+                            <td>DBNet (Differentiable Binarization Network)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Text Recognizer</strong></td>
+                            <td>CRNN (Convolutional Recurrent Neural Network)</td>
+                            <td>CRNN with VGG16 backbone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Case Sensitivity</strong></td>
+                            <td class="con">Lowercase only</td>
+                            <td class="pro">Preserves original case</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Punctuation</strong></td>
+                            <td class="con">Limited support</td>
+                            <td class="pro">Full punctuation support</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best For</strong></td>
+                            <td>Scene text (signs, labels, photos)</td>
+                            <td>Documents, books, printed text</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maintenance</strong></td>
+                            <td class="con">Less actively maintained</td>
+                            <td class="pro">Actively maintained</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Model Size</strong></td>
+                            <td>~400MB</td>
+                            <td>~300MB</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- OCR Pipeline -->
+        <section class="section">
+            <h2>How OCR Works</h2>
+            <div class="pipeline">
+                <div class="pipeline-step">
+                    <div class="step-number">1</div>
+                    <h3>Image Input</h3>
+                    <p>User uploads an image containing text (document, photo, screenshot)</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-number">2</div>
+                    <h3>Text Detection</h3>
+                    <p>Neural network (CRAFT/DBNet) locates regions containing text in the image</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-number">3</div>
+                    <h3>Text Recognition</h3>
+                    <p>CRNN model reads each detected text region and converts to characters</p>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-step">
+                    <div class="step-number">4</div>
+                    <h3>Output</h3>
+                    <p>Extracted text is returned, organized by position in the original image</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Neural Network Architectures -->
+        <section class="section">
+            <h2>Neural Network Architectures Used</h2>
+            <div class="nn-grid">
+                <div class="nn-card">
+                    <h3>CRAFT (Text Detection)</h3>
+                    <p><em>Character Region Awareness for Text Detection</em></p>
+                    <ul>
+                        <li>Detects individual character regions</li>
+                        <li>Links characters to form words</li>
+                        <li>Works well with curved/rotated text</li>
+                        <li>VGG16-based feature extraction</li>
+                    </ul>
+                </div>
+                <div class="nn-card">
+                    <h3>DBNet (Text Detection)</h3>
+                    <p><em>Differentiable Binarization Network</em></p>
+                    <ul>
+                        <li>ResNet-50 backbone</li>
+                        <li>Differentiable binarization module</li>
+                        <li>Fast and accurate</li>
+                        <li>Better for document layouts</li>
+                    </ul>
+                </div>
+                <div class="nn-card">
+                    <h3>CRNN (Text Recognition)</h3>
+                    <p><em>Convolutional Recurrent Neural Network</em></p>
+                    <ul>
+                        <li>CNN extracts visual features</li>
+                        <li>RNN (LSTM) models sequences</li>
+                        <li>CTC loss for training</li>
+                        <li>Handles variable-length text</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Terms -->
+        <section class="section">
+            <h2>Key Terms Glossary</h2>
+            <div class="glossary">
+                <div class="term">
+                    <h4>OCR (Optical Character Recognition)</h4>
+                    <p>Technology that converts images of text into machine-readable text data.</p>
+                </div>
+                <div class="term">
+                    <h4>CNN (Convolutional Neural Network)</h4>
+                    <p>A type of neural network designed for processing grid-like data such as images. Uses convolution operations to extract features.</p>
+                </div>
+                <div class="term">
+                    <h4>RNN (Recurrent Neural Network)</h4>
+                    <p>A neural network designed for sequential data. Has memory to process sequences of inputs.</p>
+                </div>
+                <div class="term">
+                    <h4>LSTM (Long Short-Term Memory)</h4>
+                    <p>A type of RNN that can learn long-term dependencies. Used in CRNN for text sequence modeling.</p>
+                </div>
+                <div class="term">
+                    <h4>CTC (Connectionist Temporal Classification)</h4>
+                    <p>A loss function used to train networks on sequence-to-sequence problems without requiring aligned data.</p>
+                </div>
+                <div class="term">
+                    <h4>Pre-trained Model</h4>
+                    <p>A model trained on a large dataset that can be used directly or fine-tuned for specific tasks.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="about-footer">
+        <p>Built with TensorFlow, Flask, keras-ocr, and docTR</p>
+        <p>&copy; Copyright 2026 by <a href="https://github.com/apollosoftdev" target="_blank">apollosoftdev</a></p>
+    </footer>
+</body>
+</html>

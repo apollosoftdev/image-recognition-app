@@ -1,0 +1,13 @@
+services:
+  ocr-app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./static:/app/static
+      - ./templates:/app/templates
+      - ./app.py:/app/app.py
+      - ./ocr_service.py:/app/ocr_service.py
+    environment:
+      - FLASK_ENV=development
+    restart: unless-stopped

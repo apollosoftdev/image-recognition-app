@@ -1,0 +1,5 @@
+tensorflow>=2.11.0,<2.16.0
+keras-ocr==0.9.3
+python-doctr[tf]>=0.8.0
+flask>=2.0.0
+pillow>=9.0.0

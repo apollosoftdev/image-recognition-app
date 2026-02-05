@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Demo - keras-ocr vs docTR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">OCR Demo</a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">Demo</a></li>
+                <li><a href="/about" class="nav-link">About & Technologies</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Image Text Recognition Demo</h1>
+            <p class="subtitle">Compare OCR results: <strong>keras-ocr</strong> vs <strong>docTR</strong></p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <p class="upload-text">Drag and drop an image here</p>
+                    <p class="upload-or">or</p>
+                    <label class="upload-button">
+                        Browse Files
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </label>
+                    <p class="upload-hint">Supports PNG, JPG, GIF, BMP, TIFF, WebP (max 16MB)</p>
+                </div>
+
+                <div class="preview-section" id="previewSection" style="display: none;">
+                    <div style="width:100%">
+                        <img id="imagePreview" src="" alt="Preview">
+                    </div>
+                    <button class="clear-button" id="clearButton">Clear & Try Another</button>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Processing with both OCR engines...</p>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <p id="errorText"></p>
+            </div>
+
+            <div class="results-comparison" id="resultsSection" style="display: none;">
+                <h2>OCR Results Comparison</h2>
+                <div class="comparison-grid">
+                    <div class="result-card keras">
+                        <div class="result-header">
+                            <h3>keras-ocr</h3>
+                            <span class="badge scene-text">Scene Text Optimized</span>
+                        </div>
+                        <div class="result-meta">
+                            <span>CRAFT Detector + CRNN Recognizer</span>
+                        </div>
+                        <div class="result-box">
+                            <pre id="kerasResult"></pre>
+                        </div>
+                        <button class="copy-button" onclick="copyText('kerasResult')">Copy</button>
+                    </div>
+
+                    <div class="result-card doctr">
+                        <div class="result-header">
+                            <h3>docTR</h3>
+                            <span class="badge document">Document Optimized</span>
+                        </div>
+                        <div class="result-meta">
+                            <span>DBNet Detector + CRNN Recognizer</span>
+                        </div>
+                        <div class="result-box">
+                            <pre id="doctrResult"></pre>
+                        </div>
+                        <button class="copy-button" onclick="copyText('doctrResult')">Copy</button>
+                    </div>
+                </div>
+
+                <div class="comparison-notes">
+                    <h3>Key Differences</h3>
+                    <div class="notes-grid">
+                        <div class="note">
+                            <strong>keras-ocr:</strong> Outputs lowercase only, optimized for signs/labels in photos
+                        </div>
+                        <div class="note">
+                            <strong>docTR:</strong> Preserves case & punctuation, better for documents
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const previewSection = document.getElementById('previewSection');
+        const imagePreview = document.getElementById('imagePreview');
+        const clearButton = document.getElementById('clearButton');
+        const resultsSection = document.getElementById('resultsSection');
+        const kerasResult = document.getElementById('kerasResult');
+        const doctrResult = document.getElementById('doctrResult');
+        const loading = document.getElementById('loading');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        clearButton.addEventListener('click', resetUI);
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showError('Please select an image file.');
+                return;
+            }
+
+            if (file.size > 16 * 1024 * 1024) {
+                showError('File size must be less than 16MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+                uploadArea.style.display = 'none';
+                previewSection.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+
+            uploadImage(file);
+        }
+
+        function uploadImage(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            loading.style.display = 'flex';
+            resultsSection.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+
+                if (data.error) {
+                    showError(data.error);
+                } else {
+                    kerasResult.textContent = data.keras_ocr;
+                    doctrResult.textContent = data.doctr;
+                    resultsSection.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                showError('An error occurred while processing the image.');
+                console.error('Error:', error);
+            });
+        }
+
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
+
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function resetUI() {
+            uploadArea.style.display = 'block';
+            previewSection.style.display = 'none';
+            resultsSection.style.display = 'none';
+            errorMessage.style.display = 'none';
+            loading.style.display = 'none';
+            fileInput.value = '';
+            imagePreview.src = '';
+        }
+    </script>
+</body>
+</html>
