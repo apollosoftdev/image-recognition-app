@@ -1232,10 +1232,12 @@ main {
 }
 
 .ocr-box.tesseract {
+    background: linear-gradient(135deg, #1565c0, #42a5f5);
     border-color: var(--accent-blue);
 }
 
 .ocr-box.paddleocr {
+    background: linear-gradient(135deg, #ad1457, #f06292);
     border-color: var(--accent-pink);
 }
 
