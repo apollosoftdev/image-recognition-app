@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/root/.keras \
 RUN --mount=type=cache,target=/root/.cache \
     python -c "from doctr.models import ocr_predictor; ocr_predictor(det_arch='db_resnet50', reco_arch='crnn_vgg16_bn', pretrained=True)" || true
 RUN --mount=type=cache,target=/root/.paddleocr \
-    python -c "from paddleocr import PaddleOCR; PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False)" || true
+    python -c "from paddleocr import PaddleOCR; PaddleOCR(lang='en')" || true
 
 # Copy application code
 COPY . .
