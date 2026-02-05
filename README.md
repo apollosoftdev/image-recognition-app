@@ -18,6 +18,11 @@ A web application that extracts text from images (OCR) using Python, TensorFlow,
 - **Flask** - Web framework
 - **Docker** - Containerization
 
+## Screenshots
+![1.png](ui-screenshots/1.png)
+![2.png](ui-screenshots/2.png)
+![3.png](ui-screenshots/3.png)
+
 ## Quick Start with Docker
 
 ### Prerequisites
