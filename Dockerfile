@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/root/.keras \
 RUN --mount=type=cache,target=/root/.cache \
     python -c "from doctr.models import ocr_predictor; ocr_predictor(det_arch='db_resnet50', reco_arch='crnn_vgg16_bn', pretrained=True)" || true
 RUN --mount=type=cache,target=/root/.paddleocr \
-    python -c "from paddleocr import PaddleOCR; PaddleOCR(use_doc_orientation_classify=False, use_doc_unwarping=False, use_textline_orientation=False)" || true
+    python -c "from paddleocr import PaddleOCR; PaddleOCR(ocr_version='PP-OCRv4', use_doc_orientation_classify=False, use_doc_unwarping=False, use_textline_orientation=False)" || true
 
 # Copy application code
 COPY . .
@@ -45,6 +45,8 @@ EXPOSE 5000
 ENV FLASK_APP=app.py
 ENV PYTHONUNBUFFERED=1
 ENV PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK=True
+ENV FLAGS_allocator_strategy=naive_best_fit
+ENV FLAGS_fraction_of_gpu_memory_to_use=0
 
 # Run the application
 CMD ["python", "app.py"]

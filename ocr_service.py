@@ -237,9 +237,12 @@ class PaddleOCRService:
         import os
         # Suppress PaddleOCR logging
         logging.getLogger('ppocr').setLevel(logging.WARNING)
+        logging.getLogger('paddle').setLevel(logging.WARNING)
         os.environ['CUDA_VISIBLE_DEVICES'] = ''  # Disable GPU
-        # PaddleOCR 3.x API
+        os.environ['FLAGS_allocator_strategy'] = 'naive_best_fit'  # Memory optimization
+        # PaddleOCR 3.x API - use mobile model for lower memory usage
         self.ocr = PaddleOCR(
+            ocr_version="PP-OCRv4",
             use_doc_orientation_classify=False,
             use_doc_unwarping=False,
             use_textline_orientation=False
