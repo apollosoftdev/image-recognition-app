@@ -46,7 +46,7 @@
                 <div class="feature-item">
                     <div class="feature-icon">⚖️</div>
                     <h4>Compare Results</h4>
-                    <p>See differences between two OCR engines</p>
+                    <p>See differences between 4 OCR engines</p>
                 </div>
             </div>
         </section>
@@ -488,14 +488,24 @@
                 <div class="arch-layer ml-layer">
                     <div class="layer-header">
                         <span class="layer-icon">🧠</span>
-                        <span class="layer-title">Machine Learning Layer</span>
+                        <span class="layer-title">Machine Learning Layer (4 OCR Engines)</span>
                     </div>
                     <div class="layer-content ml-content">
-                        <div class="tensorflow-box">
-                            <span class="tf-logo">TF</span>
-                            <span class="tf-text">TensorFlow 2.x</span>
+                        <div class="frameworks-row">
+                            <div class="framework-box tensorflow">
+                                <span class="fw-logo">TF</span>
+                                <span class="fw-text">TensorFlow</span>
+                            </div>
+                            <div class="framework-box paddle">
+                                <span class="fw-logo">PP</span>
+                                <span class="fw-text">PaddlePaddle</span>
+                            </div>
+                            <div class="framework-box tesseract-fw">
+                                <span class="fw-logo">TS</span>
+                                <span class="fw-text">Tesseract</span>
+                            </div>
                         </div>
-                        <div class="ocr-engines">
+                        <div class="ocr-engines four-engines">
                             <div class="ocr-box keras-ocr">
                                 <div class="ocr-name">keras-ocr</div>
                                 <div class="ocr-detail">CRAFT + CRNN</div>
@@ -505,6 +515,16 @@
                                 <div class="ocr-name">docTR</div>
                                 <div class="ocr-detail">DBNet + CRNN</div>
                                 <div class="ocr-badge doc">Documents</div>
+                            </div>
+                            <div class="ocr-box tesseract">
+                                <div class="ocr-name">Tesseract</div>
+                                <div class="ocr-detail">LSTM-based</div>
+                                <div class="ocr-badge classic">Classic OCR</div>
+                            </div>
+                            <div class="ocr-box paddleocr">
+                                <div class="ocr-name">PaddleOCR</div>
+                                <div class="ocr-detail">PP-OCRv4</div>
+                                <div class="ocr-badge multilang">Multi-lang</div>
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,7 @@
 
             <div class="loading" id="loading" style="display: none;">
                 <div class="spinner"></div>
-                <p>Processing with both OCR engines...</p>
+                <p>Processing with 4 OCR engines...</p>
             </div>
 
             <div class="error-message" id="errorMessage" style="display: none;">
@@ -60,15 +60,16 @@
             </div>
 
             <div class="results-comparison" id="resultsSection" style="display: none;">
-                <h2>OCR Results Comparison</h2>
-                <div class="comparison-grid">
+                <h2>OCR Results Comparison (4 Engines)</h2>
+                <div class="comparison-grid four-col">
+                    <!-- keras-ocr -->
                     <div class="result-card keras">
                         <div class="result-header">
                             <h3>keras-ocr</h3>
-                            <span class="badge scene-text">Scene Text Optimized</span>
+                            <span class="badge scene-text">Scene Text</span>
                         </div>
                         <div class="result-meta">
-                            <span>CRAFT Detector + CRNN Recognizer</span>
+                            <span>CRAFT + CRNN | TensorFlow</span>
                         </div>
                         <div class="result-box">
                             <pre id="kerasResult"></pre>
@@ -77,11 +78,11 @@
                             <div class="analysis-header">Analysis</div>
                             <div class="analysis-grid">
                                 <div class="analysis-item">
-                                    <span class="analysis-label">Processing Time</span>
+                                    <span class="analysis-label">Time</span>
                                     <span class="analysis-value" id="kerasTime">-</span>
                                 </div>
                                 <div class="analysis-item">
-                                    <span class="analysis-label">Words Detected</span>
+                                    <span class="analysis-label">Words</span>
                                     <span class="analysis-value" id="kerasWords">-</span>
                                 </div>
                                 <div class="analysis-item">
@@ -89,26 +90,27 @@
                                     <span class="analysis-value" id="kerasLines">-</span>
                                 </div>
                                 <div class="analysis-item">
-                                    <span class="analysis-label">Characters</span>
+                                    <span class="analysis-label">Chars</span>
                                     <span class="analysis-value" id="kerasChars">-</span>
                                 </div>
                             </div>
                             <div class="analysis-features">
-                                <span class="feature-tag" id="kerasUppercase">Uppercase</span>
-                                <span class="feature-tag" id="kerasNumbers">Numbers</span>
-                                <span class="feature-tag" id="kerasSymbols">Symbols</span>
+                                <span class="feature-tag" id="kerasUppercase">A-Z</span>
+                                <span class="feature-tag" id="kerasNumbers">0-9</span>
+                                <span class="feature-tag" id="kerasSymbols">!@#</span>
                             </div>
                         </div>
                         <button class="copy-button" onclick="copyText('kerasResult')">Copy</button>
                     </div>
 
+                    <!-- docTR -->
                     <div class="result-card doctr">
                         <div class="result-header">
                             <h3>docTR</h3>
-                            <span class="badge document">Document Optimized</span>
+                            <span class="badge document">Document</span>
                         </div>
                         <div class="result-meta">
-                            <span>DBNet Detector + CRNN Recognizer</span>
+                            <span>DBNet + CRNN | TensorFlow</span>
                         </div>
                         <div class="result-box">
                             <pre id="doctrResult"></pre>
@@ -117,11 +119,11 @@
                             <div class="analysis-header">Analysis</div>
                             <div class="analysis-grid">
                                 <div class="analysis-item">
-                                    <span class="analysis-label">Processing Time</span>
+                                    <span class="analysis-label">Time</span>
                                     <span class="analysis-value" id="doctrTime">-</span>
                                 </div>
                                 <div class="analysis-item">
-                                    <span class="analysis-label">Words Detected</span>
+                                    <span class="analysis-label">Words</span>
                                     <span class="analysis-value" id="doctrWords">-</span>
                                 </div>
                                 <div class="analysis-item">
@@ -134,23 +136,111 @@
                                 </div>
                             </div>
                             <div class="analysis-features">
-                                <span class="feature-tag" id="doctrUppercase">Uppercase</span>
-                                <span class="feature-tag" id="doctrNumbers">Numbers</span>
-                                <span class="feature-tag" id="doctrSymbols">Symbols</span>
+                                <span class="feature-tag" id="doctrUppercase">A-Z</span>
+                                <span class="feature-tag" id="doctrNumbers">0-9</span>
+                                <span class="feature-tag" id="doctrSymbols">!@#</span>
                             </div>
                         </div>
                         <button class="copy-button" onclick="copyText('doctrResult')">Copy</button>
+                    </div>
+
+                    <!-- Tesseract -->
+                    <div class="result-card tesseract">
+                        <div class="result-header">
+                            <h3>Tesseract</h3>
+                            <span class="badge classic">Classic OCR</span>
+                        </div>
+                        <div class="result-meta">
+                            <span>Google Tesseract | Rule-based</span>
+                        </div>
+                        <div class="result-box">
+                            <pre id="tesseractResult"></pre>
+                        </div>
+                        <div class="result-analysis" id="tesseractAnalysis">
+                            <div class="analysis-header">Analysis</div>
+                            <div class="analysis-grid">
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Time</span>
+                                    <span class="analysis-value" id="tesseractTime">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Words</span>
+                                    <span class="analysis-value" id="tesseractWords">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Lines</span>
+                                    <span class="analysis-value" id="tesseractLines">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Confidence</span>
+                                    <span class="analysis-value" id="tesseractConfidence">-</span>
+                                </div>
+                            </div>
+                            <div class="analysis-features">
+                                <span class="feature-tag" id="tesseractUppercase">A-Z</span>
+                                <span class="feature-tag" id="tesseractNumbers">0-9</span>
+                                <span class="feature-tag" id="tesseractSymbols">!@#</span>
+                            </div>
+                        </div>
+                        <button class="copy-button" onclick="copyText('tesseractResult')">Copy</button>
+                    </div>
+
+                    <!-- PaddleOCR -->
+                    <div class="result-card paddleocr">
+                        <div class="result-header">
+                            <h3>PaddleOCR</h3>
+                            <span class="badge multilang">Multi-language</span>
+                        </div>
+                        <div class="result-meta">
+                            <span>PP-OCR | PaddlePaddle</span>
+                        </div>
+                        <div class="result-box">
+                            <pre id="paddleocrResult"></pre>
+                        </div>
+                        <div class="result-analysis" id="paddleocrAnalysis">
+                            <div class="analysis-header">Analysis</div>
+                            <div class="analysis-grid">
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Time</span>
+                                    <span class="analysis-value" id="paddleocrTime">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Words</span>
+                                    <span class="analysis-value" id="paddleocrWords">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Lines</span>
+                                    <span class="analysis-value" id="paddleocrLines">-</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span class="analysis-label">Confidence</span>
+                                    <span class="analysis-value" id="paddleocrConfidence">-</span>
+                                </div>
+                            </div>
+                            <div class="analysis-features">
+                                <span class="feature-tag" id="paddleocrUppercase">A-Z</span>
+                                <span class="feature-tag" id="paddleocrNumbers">0-9</span>
+                                <span class="feature-tag" id="paddleocrSymbols">!@#</span>
+                            </div>
+                        </div>
+                        <button class="copy-button" onclick="copyText('paddleocrResult')">Copy</button>
                     </div>
                 </div>
 
                 <div class="comparison-notes">
                     <h3>Key Differences</h3>
-                    <div class="notes-grid">
-                        <div class="note">
-                            <strong>keras-ocr:</strong> Outputs lowercase only, optimized for signs/labels in photos
+                    <div class="notes-grid four-col">
+                        <div class="note keras">
+                            <strong>keras-ocr:</strong> Lowercase only, scene text optimized
                         </div>
-                        <div class="note">
-                            <strong>docTR:</strong> Preserves case & punctuation, better for documents
+                        <div class="note doctr">
+                            <strong>docTR:</strong> Preserves case, document optimized
+                        </div>
+                        <div class="note tesseract">
+                            <strong>Tesseract:</strong> Classic OCR, fast, 100+ languages
+                        </div>
+                        <div class="note paddleocr">
+                            <strong>PaddleOCR:</strong> Chinese-optimized, high accuracy
                         </div>
                     </div>
                 </div>
@@ -158,7 +248,7 @@
         </main>
 
         <footer class="about-footer">
-            <p>Built with TensorFlow, Flask, keras-ocr, and docTR</p>
+            <p>Built with TensorFlow, PaddlePaddle, Tesseract, Flask</p>
             <p>&copy; Copyright 2026 by <a href="https://github.com/apollosoftdev" target="_blank">ApexSpire</a></p>
         </footer>
     </div>
@@ -172,6 +262,8 @@
         const resultsSection = document.getElementById('resultsSection');
         const kerasResult = document.getElementById('kerasResult');
         const doctrResult = document.getElementById('doctrResult');
+        const tesseractResult = document.getElementById('tesseractResult');
+        const paddleocrResult = document.getElementById('paddleocrResult');
         const loading = document.getElementById('loading');
         const errorMessage = document.getElementById('errorMessage');
         const errorText = document.getElementById('errorText');
@@ -245,6 +337,8 @@
                     // Set text results
                     kerasResult.textContent = data.keras_ocr.text;
                     doctrResult.textContent = data.doctr.text;
+                    tesseractResult.textContent = data.tesseract.text;
+                    paddleocrResult.textContent = data.paddleocr.text;
 
                     // Set keras-ocr analysis
                     document.getElementById('kerasTime').textContent = data.keras_ocr.processing_time_ms + ' ms';
@@ -263,6 +357,24 @@
                     updateFeatureTag('doctrUppercase', data.doctr.has_uppercase);
                     updateFeatureTag('doctrNumbers', data.doctr.has_numbers);
                     updateFeatureTag('doctrSymbols', data.doctr.has_symbols);
+
+                    // Set Tesseract analysis
+                    document.getElementById('tesseractTime').textContent = data.tesseract.processing_time_ms + ' ms';
+                    document.getElementById('tesseractWords').textContent = data.tesseract.word_count;
+                    document.getElementById('tesseractLines').textContent = data.tesseract.line_count;
+                    document.getElementById('tesseractConfidence').textContent = data.tesseract.avg_confidence + '%';
+                    updateFeatureTag('tesseractUppercase', data.tesseract.has_uppercase);
+                    updateFeatureTag('tesseractNumbers', data.tesseract.has_numbers);
+                    updateFeatureTag('tesseractSymbols', data.tesseract.has_symbols);
+
+                    // Set PaddleOCR analysis
+                    document.getElementById('paddleocrTime').textContent = data.paddleocr.processing_time_ms + ' ms';
+                    document.getElementById('paddleocrWords').textContent = data.paddleocr.word_count;
+                    document.getElementById('paddleocrLines').textContent = data.paddleocr.line_count;
+                    document.getElementById('paddleocrConfidence').textContent = data.paddleocr.avg_confidence + '%';
+                    updateFeatureTag('paddleocrUppercase', data.paddleocr.has_uppercase);
+                    updateFeatureTag('paddleocrNumbers', data.paddleocr.has_numbers);
+                    updateFeatureTag('paddleocrSymbols', data.paddleocr.has_symbols);
 
                     resultsSection.style.display = 'block';
                 }

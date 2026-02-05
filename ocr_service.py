@@ -1,6 +1,6 @@
 """
 OCR Service Module
-Handles image text recognition using both keras-ocr and docTR (TensorFlow-based)
+Handles image text recognition using keras-ocr, docTR, Tesseract, and PaddleOCR
 """
 
 import time
@@ -8,6 +8,8 @@ import keras_ocr
 from doctr.io import DocumentFile
 from doctr.models import ocr_predictor
 from PIL import Image
+import pytesseract
+from paddleocr import PaddleOCR
 
 
 class KerasOCRService:
@@ -158,9 +160,155 @@ class DocTRService:
         }
 
 
+class TesseractService:
+    """Service class for performing OCR using Tesseract."""
+
+    def __init__(self):
+        """Initialize the Tesseract OCR service."""
+        # Tesseract doesn't require model loading, just verify it's available
+        try:
+            pytesseract.get_tesseract_version()
+        except Exception as e:
+            print(f"Warning: Tesseract may not be properly installed: {e}")
+
+    def extract_text(self, image_path: str) -> dict:
+        """Extract text from an image using Tesseract with detailed analysis."""
+        start_time = time.time()
+
+        try:
+            image = Image.open(image_path)
+
+            # Get detailed data with confidence scores
+            data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
+
+            processing_time = round((time.time() - start_time) * 1000)  # ms
+
+            # Extract words and confidence
+            words = []
+            confidences = []
+            for i, text in enumerate(data['text']):
+                if text.strip():
+                    words.append(text)
+                    conf = data['conf'][i]
+                    if conf > 0:  # -1 means no confidence
+                        confidences.append(conf)
+
+            # Get full text
+            full_text = pytesseract.image_to_string(image).strip()
+            lines = [line for line in full_text.split('\n') if line.strip()]
+
+            avg_confidence = round(sum(confidences) / len(confidences), 1) if confidences else 0
+
+            return {
+                "text": full_text,
+                "word_count": len(words),
+                "line_count": len(lines),
+                "char_count": len(full_text.replace(" ", "").replace("\n", "")),
+                "regions_detected": len(words),
+                "processing_time_ms": processing_time,
+                "avg_confidence": avg_confidence,
+                "has_uppercase": any(c.isupper() for c in full_text),
+                "has_numbers": any(c.isdigit() for c in full_text),
+                "has_symbols": any(not c.isalnum() and c not in ' \n' for c in full_text)
+            }
+
+        except Exception as e:
+            processing_time = round((time.time() - start_time) * 1000)
+            return {
+                "text": f"Error: {str(e)}",
+                "word_count": 0,
+                "line_count": 0,
+                "char_count": 0,
+                "regions_detected": 0,
+                "processing_time_ms": processing_time,
+                "avg_confidence": 0,
+                "has_uppercase": False,
+                "has_numbers": False,
+                "has_symbols": False
+            }
+
+
+class PaddleOCRService:
+    """Service class for performing OCR using PaddleOCR."""
+
+    def __init__(self):
+        """Initialize the PaddleOCR with pre-trained models."""
+        self.ocr = PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False, show_log=False)
+
+    def extract_text(self, image_path: str) -> dict:
+        """Extract text from an image using PaddleOCR with detailed analysis."""
+        start_time = time.time()
+
+        try:
+            result = self.ocr.ocr(image_path, cls=True)
+
+            processing_time = round((time.time() - start_time) * 1000)  # ms
+
+            if not result or not result[0]:
+                return {
+                    "text": "",
+                    "word_count": 0,
+                    "line_count": 0,
+                    "char_count": 0,
+                    "regions_detected": 0,
+                    "processing_time_ms": processing_time,
+                    "avg_confidence": 0,
+                    "has_uppercase": False,
+                    "has_numbers": False,
+                    "has_symbols": False
+                }
+
+            # Extract text and confidence from results
+            lines = []
+            confidences = []
+            word_count = 0
+
+            for line in result[0]:
+                if line and len(line) >= 2:
+                    text = line[1][0]  # Text content
+                    confidence = line[1][1]  # Confidence score
+                    if text.strip():
+                        lines.append(text)
+                        confidences.append(confidence * 100)  # Convert to percentage
+                        word_count += len(text.split())
+
+            full_text = "\n".join(lines)
+            avg_confidence = round(sum(confidences) / len(confidences), 1) if confidences else 0
+
+            return {
+                "text": full_text,
+                "word_count": word_count,
+                "line_count": len(lines),
+                "char_count": len(full_text.replace(" ", "").replace("\n", "")),
+                "regions_detected": len(lines),
+                "processing_time_ms": processing_time,
+                "avg_confidence": avg_confidence,
+                "has_uppercase": any(c.isupper() for c in full_text),
+                "has_numbers": any(c.isdigit() for c in full_text),
+                "has_symbols": any(not c.isalnum() and c not in ' \n' for c in full_text)
+            }
+
+        except Exception as e:
+            processing_time = round((time.time() - start_time) * 1000)
+            return {
+                "text": f"Error: {str(e)}",
+                "word_count": 0,
+                "line_count": 0,
+                "char_count": 0,
+                "regions_detected": 0,
+                "processing_time_ms": processing_time,
+                "avg_confidence": 0,
+                "has_uppercase": False,
+                "has_numbers": False,
+                "has_symbols": False
+            }
+
+
 # Singleton instances
 _keras_ocr_service = None
 _doctr_service = None
+_tesseract_service = None
+_paddleocr_service = None
 
 
 def get_keras_ocr_service() -> KerasOCRService:
@@ -177,3 +325,19 @@ def get_doctr_service() -> DocTRService:
     if _doctr_service is None:
         _doctr_service = DocTRService()
     return _doctr_service
+
+
+def get_tesseract_service() -> TesseractService:
+    """Get or create the Tesseract service singleton."""
+    global _tesseract_service
+    if _tesseract_service is None:
+        _tesseract_service = TesseractService()
+    return _tesseract_service
+
+
+def get_paddleocr_service() -> PaddleOCRService:
+    """Get or create the PaddleOCR service singleton."""
+    global _paddleocr_service
+    if _paddleocr_service is None:
+        _paddleocr_service = PaddleOCRService()
+    return _paddleocr_service

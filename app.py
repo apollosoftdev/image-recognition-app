@@ -7,7 +7,12 @@ import os
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 
-from ocr_service import get_keras_ocr_service, get_doctr_service
+from ocr_service import (
+    get_keras_ocr_service,
+    get_doctr_service,
+    get_tesseract_service,
+    get_paddleocr_service
+)
 
 app = Flask(__name__)
 
@@ -60,13 +65,17 @@ def upload_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
 
-        # Get both OCR services
+        # Get all OCR services
         keras_service = get_keras_ocr_service()
         doctr_service = get_doctr_service()
+        tesseract_service = get_tesseract_service()
+        paddleocr_service = get_paddleocr_service()
 
-        # Extract text using both engines (returns dict with analysis)
+        # Extract text using all engines (returns dict with analysis)
         keras_result = keras_service.extract_text(filepath)
         doctr_result = doctr_service.extract_text(filepath)
+        tesseract_result = tesseract_service.extract_text(filepath)
+        paddleocr_result = paddleocr_service.extract_text(filepath)
 
         # Clean up the uploaded file
         os.remove(filepath)
@@ -94,6 +103,30 @@ def upload_file():
                 'has_uppercase': doctr_result['has_uppercase'],
                 'has_numbers': doctr_result['has_numbers'],
                 'has_symbols': doctr_result['has_symbols']
+            },
+            'tesseract': {
+                'text': tesseract_result['text'] if tesseract_result['text'].strip() else '(No text detected)',
+                'word_count': tesseract_result['word_count'],
+                'line_count': tesseract_result['line_count'],
+                'char_count': tesseract_result['char_count'],
+                'regions_detected': tesseract_result['regions_detected'],
+                'processing_time_ms': tesseract_result['processing_time_ms'],
+                'avg_confidence': tesseract_result['avg_confidence'],
+                'has_uppercase': tesseract_result['has_uppercase'],
+                'has_numbers': tesseract_result['has_numbers'],
+                'has_symbols': tesseract_result['has_symbols']
+            },
+            'paddleocr': {
+                'text': paddleocr_result['text'] if paddleocr_result['text'].strip() else '(No text detected)',
+                'word_count': paddleocr_result['word_count'],
+                'line_count': paddleocr_result['line_count'],
+                'char_count': paddleocr_result['char_count'],
+                'regions_detected': paddleocr_result['regions_detected'],
+                'processing_time_ms': paddleocr_result['processing_time_ms'],
+                'avg_confidence': paddleocr_result['avg_confidence'],
+                'has_uppercase': paddleocr_result['has_uppercase'],
+                'has_numbers': paddleocr_result['has_numbers'],
+                'has_symbols': paddleocr_result['has_symbols']
             }
         })
 
@@ -115,6 +148,10 @@ if __name__ == '__main__':
     get_keras_ocr_service()
     print("Loading docTR models...")
     get_doctr_service()
+    print("Loading Tesseract...")
+    get_tesseract_service()
+    print("Loading PaddleOCR models...")
+    get_paddleocr_service()
     print("All OCR services ready!")
 
     app.run(debug=True, host='0.0.0.0', port=5000)

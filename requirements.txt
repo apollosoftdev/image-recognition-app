@@ -3,3 +3,6 @@ keras-ocr==0.9.3
 python-doctr[tf]>=0.8.0
 flask>=2.0.0
 pillow>=9.0.0
+pytesseract>=0.3.10
+paddlepaddle>=2.5.0
+paddleocr>=2.7.0
