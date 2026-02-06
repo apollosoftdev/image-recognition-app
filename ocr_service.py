@@ -237,15 +237,14 @@ class PaddleOCRService:
         import os
         # Suppress PaddleOCR logging
         logging.getLogger('ppocr').setLevel(logging.WARNING)
-        logging.getLogger('paddle').setLevel(logging.WARNING)
         os.environ['CUDA_VISIBLE_DEVICES'] = ''  # Disable GPU
         os.environ['FLAGS_allocator_strategy'] = 'naive_best_fit'  # Memory optimization
-        # PaddleOCR 3.x API - use mobile model for lower memory usage
+        # PaddleOCR 2.7.x API - use lightweight English model
         self.ocr = PaddleOCR(
-            ocr_version="PP-OCRv4",
-            use_doc_orientation_classify=False,
-            use_doc_unwarping=False,
-            use_textline_orientation=False
+            use_angle_cls=True,
+            lang='en',
+            use_gpu=False,
+            show_log=False
         )
 
     def extract_text(self, image_path: str) -> dict:
@@ -253,11 +252,11 @@ class PaddleOCRService:
         start_time = time.time()
 
         try:
-            result = self.ocr.predict(input=image_path)
+            result = self.ocr.ocr(image_path, cls=True)
 
             processing_time = round((time.time() - start_time) * 1000)  # ms
 
-            if not result or len(result) == 0:
+            if not result or not result[0]:
                 return {
                     "text": "",
                     "word_count": 0,
@@ -271,40 +270,19 @@ class PaddleOCRService:
                     "has_symbols": False
                 }
 
-            # Extract text and confidence from results (PaddleOCR 3.x format)
+            # Extract text and confidence from results (PaddleOCR 2.x format)
             lines = []
             confidences = []
             word_count = 0
 
-            # Handle different result formats
-            ocr_result = result[0] if isinstance(result, list) else result
-
-            # Try to get rec_texts and rec_scores from the result
-            if hasattr(ocr_result, 'rec_texts'):
-                texts = ocr_result.rec_texts
-                scores = ocr_result.rec_scores if hasattr(ocr_result, 'rec_scores') else []
-            elif isinstance(ocr_result, dict):
-                texts = ocr_result.get('rec_texts', ocr_result.get('texts', []))
-                scores = ocr_result.get('rec_scores', ocr_result.get('scores', []))
-            else:
-                # Fallback: try to iterate as before
-                texts = []
-                scores = []
-                try:
-                    for item in ocr_result:
-                        if item and len(item) >= 2:
-                            texts.append(item[1][0])
-                            scores.append(item[1][1])
-                except:
-                    pass
-
-            for i, text in enumerate(texts):
-                if text and str(text).strip():
-                    lines.append(str(text))
-                    if i < len(scores):
-                        conf = scores[i]
-                        confidences.append(float(conf) * 100 if conf <= 1 else float(conf))
-                    word_count += len(str(text).split())
+            for line in result[0]:
+                if line and len(line) >= 2:
+                    text = line[1][0]
+                    conf = line[1][1]
+                    if text and str(text).strip():
+                        lines.append(str(text))
+                        confidences.append(float(conf) * 100)
+                        word_count += len(str(text).split())
 
             full_text = "\n".join(lines)
             avg_confidence = round(sum(confidences) / len(confidences), 1) if confidences else 0

@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Pre-download the OCR models during build
 RUN python -c "import keras_ocr; keras_ocr.pipeline.Pipeline()" || true
 RUN python -c "from doctr.models import ocr_predictor; ocr_predictor(det_arch='db_resnet50', reco_arch='crnn_vgg16_bn', pretrained=True)" || true
-RUN python -c "from paddleocr import PaddleOCR; PaddleOCR(ocr_version='PP-OCRv4', use_doc_orientation_classify=False, use_doc_unwarping=False, use_textline_orientation=False)" || true
+RUN python -c "from paddleocr import PaddleOCR; PaddleOCR(use_angle_cls=True, lang='en', use_gpu=False, show_log=False)" || true
 
 # Copy application code
 COPY . .
