@@ -2303,11 +2303,6 @@ main {
 .memory-indicator.level-3 { width: 60%; }
 .memory-indicator.level-4 { width: 80%; }
 
-.rnn-step.final .memory-indicator {
-    width: 100%;
-    background: var(--accent-yellow);
-}
-
 .rnn-output {
     margin-top: 12px;
     padding: 6px 12px;
