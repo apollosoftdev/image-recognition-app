@@ -165,32 +165,14 @@ class TesseractService:
 
     def __init__(self):
         """Initialize the Tesseract OCR service."""
-        # Tesseract doesn't require model loading, just verify it's available
+        # Use Chinese Simplified + English (chi_sim handles most Chinese text well)
+        # This combination works well for mixed Chinese/English documents
+        self.lang = 'chi_sim+eng'
         try:
-            pytesseract.get_tesseract_version()
+            version = pytesseract.get_tesseract_version()
+            print(f"Tesseract version: {version}")
         except Exception as e:
             print(f"Warning: Tesseract may not be properly installed: {e}")
-
-    def _detect_script(self, image):
-        """Detect if image contains CJK characters using OSD."""
-        try:
-            # Try to detect script/orientation
-            osd = pytesseract.image_to_osd(image, output_type=pytesseract.Output.DICT)
-            script = osd.get('script', 'Latin')
-            return script
-        except Exception:
-            return 'Latin'
-
-    def _has_cjk_chars(self, text):
-        """Check if text contains CJK characters."""
-        for char in text:
-            if '\u4e00' <= char <= '\u9fff':  # Chinese
-                return True
-            if '\u3040' <= char <= '\u30ff':  # Japanese Hiragana/Katakana
-                return True
-            if '\uac00' <= char <= '\ud7af':  # Korean
-                return True
-        return False
 
     def extract_text(self, image_path: str) -> dict:
         """Extract text from an image using Tesseract with detailed analysis."""
@@ -207,43 +189,19 @@ class TesseractService:
             elif image.mode != 'RGB':
                 image = image.convert('RGB')
 
-            # Tesseract config for better accuracy
-            # PSM 3: Fully automatic page segmentation, but no OSD
-            # OEM 3: Default, based on what is available (LSTM + Legacy)
-            custom_config = r'--oem 3 --psm 3'
+            # Tesseract config:
+            # PSM 3: Fully automatic page segmentation (default, works well for documents)
+            # OEM 1: LSTM only (best for modern Tesseract 4+)
+            custom_config = r'--oem 1 --psm 3'
 
-            # First try with Chinese + English (best for mixed content)
-            # Using chi_sim as primary with eng as secondary
-            lang_cjk = 'chi_sim+chi_tra+eng'
-            lang_latin = 'eng'
-
-            # Try CJK first for better Chinese detection
-            full_text_cjk = pytesseract.image_to_string(
-                image, lang=lang_cjk, config=custom_config
+            # Get full text with Chinese + English
+            full_text = pytesseract.image_to_string(
+                image, lang=self.lang, config=custom_config
             ).strip()
-
-            # Also try Latin only
-            full_text_latin = pytesseract.image_to_string(
-                image, lang=lang_latin, config=custom_config
-            ).strip()
-
-            # Choose the better result based on content
-            # If CJK text has actual CJK characters, prefer it
-            if self._has_cjk_chars(full_text_cjk):
-                full_text = full_text_cjk
-                lang_used = lang_cjk
-            elif len(full_text_cjk) > len(full_text_latin) * 1.2:
-                # CJK result is significantly longer
-                full_text = full_text_cjk
-                lang_used = lang_cjk
-            else:
-                # Default to Latin if no CJK detected
-                full_text = full_text_latin if full_text_latin else full_text_cjk
-                lang_used = lang_latin if full_text_latin else lang_cjk
 
             # Get detailed data with confidence scores
             data = pytesseract.image_to_data(
-                image, lang=lang_used, config=custom_config,
+                image, lang=self.lang, config=custom_config,
                 output_type=pytesseract.Output.DICT
             )
 
@@ -277,6 +235,7 @@ class TesseractService:
 
         except Exception as e:
             processing_time = round((time.time() - start_time) * 1000)
+            print(f"Tesseract error: {str(e)}")
             return {
                 "text": f"Error: {str(e)}",
                 "word_count": 0,
