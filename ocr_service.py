@@ -166,6 +166,8 @@ class TesseractService:
     def __init__(self):
         """Initialize the Tesseract OCR service."""
         # Tesseract doesn't require model loading, just verify it's available
+        # Supports English, Chinese (Simplified & Traditional), and Japanese
+        self.lang = 'eng+chi_sim+chi_tra+jpn'
         try:
             pytesseract.get_tesseract_version()
         except Exception as e:
@@ -178,8 +180,8 @@ class TesseractService:
         try:
             image = Image.open(image_path)
 
-            # Get detailed data with confidence scores
-            data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
+            # Get detailed data with confidence scores (multilingual: en, zh, ja)
+            data = pytesseract.image_to_data(image, lang=self.lang, output_type=pytesseract.Output.DICT)
 
             processing_time = round((time.time() - start_time) * 1000)  # ms
 
@@ -193,8 +195,8 @@ class TesseractService:
                     if conf > 0:  # -1 means no confidence
                         confidences.append(conf)
 
-            # Get full text
-            full_text = pytesseract.image_to_string(image).strip()
+            # Get full text (multilingual: en, zh, ja)
+            full_text = pytesseract.image_to_string(image, lang=self.lang).strip()
             lines = [line for line in full_text.split('\n') if line.strip()]
 
             avg_confidence = round(sum(confidences) / len(confidences), 1) if confidences else 0
@@ -239,10 +241,10 @@ class PaddleOCRService:
         logging.getLogger('ppocr').setLevel(logging.WARNING)
         os.environ['CUDA_VISIBLE_DEVICES'] = ''  # Disable GPU
         os.environ['FLAGS_allocator_strategy'] = 'naive_best_fit'  # Memory optimization
-        # PaddleOCR 2.7.x API - use lightweight English model
+        # PaddleOCR 2.x API - Chinese model (supports Chinese, English, and Japanese Kanji)
         self.ocr = PaddleOCR(
             use_angle_cls=True,
-            lang='en',
+            lang='ch',
             use_gpu=False,
             show_log=False
         )
