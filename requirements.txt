@@ -4,5 +4,5 @@ python-doctr[tf]>=0.8.0
 flask>=2.0.0
 pillow>=9.0.0
 pytesseract>=0.3.10
-paddlepaddle==2.5.2
-paddleocr==2.7.0
+paddlepaddle==2.6.2
+paddleocr==2.8.1
