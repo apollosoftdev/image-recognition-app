@@ -2055,7 +2055,524 @@ main {
     }
 }
 
-/* NN Explanation Cards */
+/* Neural Network Architecture Section - Improved */
+.nn-architecture-section {
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+
+.nn-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    .nn-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* NN Architecture Cards */
+.nn-arch-card {
+    background: var(--bg-tertiary);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nn-arch-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.nn-arch-card.cnn-card {
+    border-top: 3px solid var(--accent-blue);
+}
+
+.nn-arch-card.rnn-card {
+    border-top: 3px solid var(--accent-green);
+}
+
+.nn-arch-header {
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+}
+
+.nn-arch-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cnn-card .nn-arch-icon {
+    background: linear-gradient(135deg, #58a6ff, #388bfd);
+    color: white;
+}
+
+.rnn-card .nn-arch-icon {
+    background: linear-gradient(135deg, #3fb950, #2ea043);
+    color: white;
+}
+
+.nn-arch-title {
+    flex: 1;
+}
+
+.nn-arch-title h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+}
+
+.nn-arch-subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.nn-arch-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nn-arch-badge.cnn-badge {
+    background: rgba(88, 166, 255, 0.2);
+    color: var(--accent-blue);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+}
+
+.nn-arch-badge.rnn-badge {
+    background: rgba(63, 185, 80, 0.2);
+    color: var(--accent-green);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.nn-arch-body {
+    padding: 25px;
+}
+
+.nn-arch-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.nn-arch-desc strong {
+    color: var(--accent-cyan);
+}
+
+/* Flow Diagram */
+.nn-flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.flow-step {
+    text-align: center;
+}
+
+.flow-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    transition: transform 0.2s ease;
+}
+
+.flow-box:hover {
+    transform: scale(1.05);
+}
+
+.flow-box svg {
+    margin-bottom: 4px;
+}
+
+.flow-box.input-box {
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.flow-box.conv-box {
+    background: linear-gradient(135deg, #58a6ff, #388bfd);
+    color: white;
+}
+
+.flow-box.output-box {
+    background: linear-gradient(135deg, #3fb950, #2ea043);
+    color: white;
+}
+
+.flow-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.flow-arrow {
+    color: var(--accent-purple);
+    display: flex;
+    align-items: center;
+}
+
+/* RNN Flow New Design */
+.rnn-flow-new {
+    padding: 15px;
+}
+
+.rnn-sequence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.rnn-step {
+    text-align: center;
+    position: relative;
+}
+
+.rnn-input-char {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 8px;
+    font-family: 'Monaco', 'Consolas', monospace;
+}
+
+.rnn-cell-box {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #3fb950, #2ea043);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    position: relative;
+}
+
+.memory-indicator {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 4px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.memory-indicator.level-1 { width: 20%; }
+.memory-indicator.level-2 { width: 40%; }
+.memory-indicator.level-3 { width: 60%; }
+.memory-indicator.level-4 { width: 80%; }
+
+.rnn-step.final .memory-indicator {
+    width: 100%;
+    background: var(--accent-yellow);
+}
+
+.rnn-output {
+    margin-top: 12px;
+    padding: 6px 12px;
+    background: var(--accent-purple);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.rnn-connector {
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+}
+
+.nn-arch-usage {
+    padding: 15px 18px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-cyan);
+}
+
+.nn-arch-usage strong {
+    color: var(--accent-cyan);
+}
+
+/* CRNN Featured Section */
+.crnn-featured-section {
+    background: linear-gradient(135deg, #1a1f35 0%, #0f172a 100%);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid var(--accent-purple);
+    box-shadow: 0 0 60px rgba(163, 113, 247, 0.15);
+}
+
+.crnn-header {
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(163, 113, 247, 0.2), rgba(163, 113, 247, 0.05));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.crnn-title-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.crnn-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #a371f7, #8957e5);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.crnn-title-area h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+
+.crnn-title-area p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.crnn-badge {
+    background: var(--accent-purple);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.crnn-body {
+    padding: 30px;
+}
+
+.crnn-desc {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.crnn-desc strong {
+    color: var(--accent-purple);
+}
+
+/* CRNN Pipeline */
+.crnn-pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.crnn-stage-card {
+    background: var(--bg-tertiary);
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    min-width: 160px;
+    position: relative;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.crnn-stage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stage-number {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: white;
+}
+
+.cnn-stage-card .stage-number {
+    background: var(--accent-blue);
+}
+
+.rnn-stage-card .stage-number {
+    background: var(--accent-green);
+}
+
+.ctc-stage-card .stage-number {
+    background: var(--accent-purple);
+}
+
+.stage-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: white;
+}
+
+.stage-icon.cnn-icon {
+    background: linear-gradient(135deg, #58a6ff, #388bfd);
+}
+
+.stage-icon.rnn-icon {
+    background: linear-gradient(135deg, #3fb950, #2ea043);
+}
+
+.stage-icon.ctc-icon {
+    background: linear-gradient(135deg, #a371f7, #8957e5);
+}
+
+.crnn-stage-card h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin: 0 0 8px 0;
+}
+
+.crnn-stage-card p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0 0 12px 0;
+}
+
+.stage-tech {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.crnn-flow-arrow {
+    color: var(--accent-purple);
+    display: flex;
+    align-items: center;
+}
+
+.crnn-flow-arrow svg {
+    opacity: 0.7;
+}
+
+/* CRNN Engines */
+.crnn-engines {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.crnn-engines strong {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.engine-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.engine-tag {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.engine-tag.keras {
+    background: rgba(247, 129, 102, 0.2);
+    color: var(--accent-orange);
+    border: 1px solid rgba(247, 129, 102, 0.3);
+}
+
+.engine-tag.doctr {
+    background: rgba(63, 185, 80, 0.2);
+    color: var(--accent-green);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.engine-tag.paddle {
+    background: rgba(247, 120, 186, 0.2);
+    color: var(--accent-pink);
+    border: 1px solid rgba(247, 120, 186, 0.3);
+}
+
+/* Legacy NN styles (keep for compatibility) */
 .nn-explanation {
     display: flex;
     flex-direction: column;
@@ -2067,220 +2584,6 @@ main {
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border-color);
-}
-
-.nn-card-large.featured {
-    border: 2px solid var(--accent-purple);
-}
-
-.nn-card-header {
-    padding: 20px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nn-card-header.cnn {
-    background: linear-gradient(135deg, rgba(88, 166, 255, 0.2), rgba(88, 166, 255, 0.05));
-}
-
-.nn-card-header.rnn {
-    background: linear-gradient(135deg, rgba(63, 185, 80, 0.2), rgba(63, 185, 80, 0.05));
-}
-
-.nn-card-header.crnn {
-    background: linear-gradient(135deg, rgba(163, 113, 247, 0.2), rgba(163, 113, 247, 0.05));
-}
-
-.nn-card-header h3 {
-    color: #ffffff;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-.nn-badge {
-    background: rgba(0,0,0,0.3);
-    color: #c9d1d9;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    border: 1px solid #30363d;
-}
-
-.nn-badge.highlight {
-    background: #a371f7;
-    color: white;
-    border-color: #a371f7;
-}
-
-.nn-card-body {
-    padding: 25px;
-}
-
-.nn-description {
-    color: #c9d1d9;
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.nn-description strong {
-    color: #58d5ff;
-}
-
-.nn-how-it-works h5 {
-    color: #ffffff;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-    font-weight: 700;
-}
-
-.cnn-layers {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.cnn-layer {
-    text-align: center;
-}
-
-.layer-box {
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-}
-
-.layer-box.input {
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-}
-
-.layer-box.conv {
-    background: linear-gradient(135deg, #58a6ff, #388bfd);
-    color: white;
-}
-
-.layer-box.output {
-    background: linear-gradient(135deg, #3fb950, #2ea043);
-    color: white;
-}
-
-.cnn-layer span {
-    font-size: 0.75rem;
-    color: #b0bac5;
-}
-
-.layer-arrow {
-    color: #a371f7;
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-
-/* RNN Flow */
-.rnn-flow {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.rnn-cell {
-    text-align: center;
-}
-
-.cell-box {
-    background: linear-gradient(135deg, #3fb950, #2ea043);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-}
-
-.cell-input {
-    font-size: 1.2rem;
-    color: var(--accent-cyan);
-    font-weight: 700;
-}
-
-.cell-memory {
-    font-size: 0.75rem;
-    color: #b0bac5;
-}
-
-.rnn-arrow {
-    color: #3fb950;
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-
-/* CRNN Architecture */
-.crnn-architecture {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 15px;
-}
-
-.crnn-stage {
-    text-align: center;
-}
-
-.stage-label {
-    font-size: 0.8rem;
-    color: #b0bac5;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.stage-box {
-    padding: 20px 25px;
-    border-radius: 12px;
-    min-width: 160px;
-}
-
-.stage-box span {
-    display: block;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.stage-box small {
-    font-size: 0.75rem;
-    opacity: 0.8;
-    color: white;
-}
-
-.stage-box.cnn-stage {
-    background: linear-gradient(135deg, #58a6ff, #388bfd);
-}
-
-.stage-box.rnn-stage {
-    background: linear-gradient(135deg, #3fb950, #2ea043);
-}
-
-.stage-box.ctc-stage {
-    background: linear-gradient(135deg, #a371f7, #8957e5);
-}
-
-.crnn-arrow {
-    font-size: 1.5rem;
-    color: var(--accent-purple);
 }
 
 .nn-used-for {

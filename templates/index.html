@@ -457,37 +457,52 @@
                 this.ctx = this.canvas.getContext('2d');
                 this.animationProgress = 0;
                 this.data = null;
+                this.dpr = window.devicePixelRatio || 1;
                 this.colors = {
-                    keras: { line: '#f78166', fill: 'rgba(247, 129, 102, 0.15)' },
-                    doctr: { line: '#3fb950', fill: 'rgba(63, 185, 80, 0.15)' },
-                    tesseract: { line: '#58a6ff', fill: 'rgba(88, 166, 255, 0.15)' },
-                    paddleocr: { line: '#f778ba', fill: 'rgba(247, 120, 186, 0.15)' }
+                    keras: { line: '#f78166', fill: 'rgba(247, 129, 102, 0.2)' },
+                    doctr: { line: '#3fb950', fill: 'rgba(63, 185, 80, 0.2)' },
+                    tesseract: { line: '#58a6ff', fill: 'rgba(88, 166, 255, 0.2)' },
+                    paddleocr: { line: '#f778ba', fill: 'rgba(247, 120, 186, 0.2)' }
                 };
                 this.metrics = ['Speed', 'Words', 'Lines', 'Chars', 'Confidence'];
-                this.resize();
+                this.width = 800;
+                this.height = 350;
                 window.addEventListener('resize', () => this.resize());
             }
 
             resize() {
                 const container = this.canvas.parentElement;
-                const dpr = window.devicePixelRatio || 1;
                 const rect = container.getBoundingClientRect();
-                this.canvas.width = rect.width * dpr;
-                this.canvas.height = 350 * dpr;
-                this.canvas.style.width = rect.width + 'px';
-                this.canvas.style.height = '350px';
-                this.ctx.scale(dpr, dpr);
-                this.width = rect.width;
-                this.height = 350;
-                if (this.data) this.draw(1);
+
+                // Only resize if container has width
+                if (rect.width > 0) {
+                    this.width = rect.width;
+                    this.height = 350;
+
+                    // Set canvas size with device pixel ratio for sharp rendering
+                    this.canvas.width = this.width * this.dpr;
+                    this.canvas.height = this.height * this.dpr;
+                    this.canvas.style.width = this.width + 'px';
+                    this.canvas.style.height = this.height + 'px';
+
+                    // Reset and scale context
+                    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+                    this.ctx.scale(this.dpr, this.dpr);
+
+                    if (this.data) this.draw(1);
+                }
             }
 
             setData(ocrData) {
+                // Resize first to ensure canvas is properly sized (chart section may have just become visible)
+                this.resize();
+
                 const maxTime = Math.max(
                     ocrData.keras_ocr.processing_time_ms,
                     ocrData.doctr.processing_time_ms,
                     ocrData.tesseract.processing_time_ms,
-                    ocrData.paddleocr.processing_time_ms
+                    ocrData.paddleocr.processing_time_ms,
+                    1
                 );
                 const maxWords = Math.max(
                     ocrData.keras_ocr.word_count,
@@ -708,10 +723,13 @@
         let comparisonChart = null;
 
         function updateComparisonChart(data) {
-            if (!comparisonChart) {
-                comparisonChart = new SmoothLineChart('comparisonChart');
-            }
-            comparisonChart.setData(data);
+            // Use setTimeout to ensure the results section is visible and has dimensions
+            setTimeout(() => {
+                if (!comparisonChart) {
+                    comparisonChart = new SmoothLineChart('comparisonChart');
+                }
+                comparisonChart.setData(data);
+            }, 100);
         }
     </script>
 </body>
