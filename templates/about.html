@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - OCR Technologies</title>
+    <title>About - OCR Technologies & AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -23,85 +23,171 @@
         <section class="section">
             <h1>About This Application</h1>
             <p class="lead">
-                This web application demonstrates <strong>Optical Character Recognition (OCR)</strong> —
-                a technology that extracts text from images using artificial intelligence.
-                Upload any image containing text, and our AI models will read and convert it to editable text.
+                This web application demonstrates <strong>Optical Character Recognition (OCR)</strong> using
+                <strong>4 different AI-powered engines</strong>. Upload any image containing text, and compare
+                how different machine learning approaches extract and interpret the text.
             </p>
             <div class="feature-highlights">
                 <div class="feature-item">
-                    <div class="feature-icon">📷</div>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
                     <h4>Image Input</h4>
-                    <p>Upload photos, screenshots, or scanned documents</p>
+                    <p>Upload photos, screenshots, or scanned documents in any format</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon">🤖</div>
-                    <h4>AI Processing</h4>
-                    <p>Deep learning models detect and recognize text</p>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                            <path d="M12 2a10 10 0 0 1 10 10"></path>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                    </div>
+                    <h4>4 AI Engines</h4>
+                    <p>Process with keras-ocr, docTR, Tesseract, and PaddleOCR simultaneously</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon">📝</div>
-                    <h4>Text Output</h4>
-                    <p>Get editable, copyable text results instantly</p>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h4>Multi-language</h4>
+                    <p>Supports English, Chinese (Simplified & Traditional), Japanese</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon">⚖️</div>
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </div>
                     <h4>Compare Results</h4>
-                    <p>See differences between 4 OCR engines</p>
+                    <p>Analyze accuracy, speed, and confidence across all engines</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is AI Section -->
+        <section class="section">
+            <h2>What is Artificial Intelligence?</h2>
+            <p class="section-intro">
+                Before understanding OCR, let's explore the foundations of AI and how this technology fits into the bigger picture.
+            </p>
+
+            <div class="ai-definition-box">
+                <div class="def-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 16v-4"></path>
+                        <path d="M12 8h.01"></path>
+                    </svg>
+                    <h3>Artificial Intelligence (AI)</h3>
+                </div>
+                <p class="def-text">
+                    <strong>Artificial Intelligence</strong> is the simulation of human intelligence by machines.
+                    It encompasses any technique that enables computers to mimic human behavior, including
+                    learning, reasoning, problem-solving, perception, and language understanding.
+                </p>
+                <div class="def-examples">
+                    <span class="example-tag">Virtual Assistants</span>
+                    <span class="example-tag">Self-driving Cars</span>
+                    <span class="example-tag">Game AI</span>
+                    <span class="example-tag">Robotics</span>
+                    <span class="example-tag">Expert Systems</span>
                 </div>
             </div>
         </section>
 
         <!-- AI/ML/DL Hierarchy -->
         <section class="section">
-            <h2>Understanding AI, ML, DL & Neural Networks</h2>
+            <h2>The AI Hierarchy: AI, ML, DL & Neural Networks</h2>
             <p class="section-intro">
-                Before diving into how this app works, let's understand the hierarchy of artificial intelligence technologies.
+                Understanding the relationship between these concepts is crucial for grasping how modern OCR works.
             </p>
 
             <div class="ai-hierarchy-diagram">
                 <div class="hierarchy-level ai-level">
                     <div class="level-content">
                         <div class="level-header">
-                            <span class="level-icon">🧠</span>
+                            <span class="level-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 16v-4"></path>
+                                    <path d="M12 8h.01"></path>
+                                </svg>
+                            </span>
                             <h3>Artificial Intelligence (AI)</h3>
                         </div>
-                        <p>The broadest concept — machines that can perform tasks that typically require human intelligence</p>
+                        <p>The broadest concept: machines that perform tasks requiring human-like intelligence</p>
                         <div class="level-examples">
-                            <span>Examples: Virtual assistants, Game AI, Robotics, Expert systems</span>
+                            <span>Rule-based systems, Expert systems, Robotics, Game AI</span>
                         </div>
                     </div>
 
                     <div class="hierarchy-level ml-level">
                         <div class="level-content">
                             <div class="level-header">
-                                <span class="level-icon">📊</span>
+                                <span class="level-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                                    </svg>
+                                </span>
                                 <h3>Machine Learning (ML)</h3>
                             </div>
-                            <p>A subset of AI — systems that learn from data without being explicitly programmed</p>
+                            <p>A subset of AI: algorithms that learn patterns from data without explicit programming</p>
                             <div class="level-examples">
-                                <span>Examples: Spam filters, Recommendation systems, Fraud detection</span>
+                                <span>Spam filters, Recommendations, Fraud detection, Predictions</span>
                             </div>
                         </div>
 
                         <div class="hierarchy-level dl-level">
                             <div class="level-content">
                                 <div class="level-header">
-                                    <span class="level-icon">🔮</span>
+                                    <span class="level-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                            <polyline points="2 17 12 22 22 17"></polyline>
+                                            <polyline points="2 12 12 17 22 12"></polyline>
+                                        </svg>
+                                    </span>
                                     <h3>Deep Learning (DL)</h3>
                                 </div>
-                                <p>A subset of ML — uses neural networks with many layers to learn complex patterns</p>
+                                <p>A subset of ML: neural networks with many layers that learn hierarchical representations</p>
                                 <div class="level-examples">
-                                    <span>Examples: Image recognition, Speech recognition, Language translation</span>
+                                    <span>Image recognition, Speech recognition, Language translation, OCR</span>
                                 </div>
                             </div>
 
                             <div class="hierarchy-level nn-level">
                                 <div class="level-content">
                                     <div class="level-header">
-                                        <span class="level-icon">🕸️</span>
+                                        <span class="level-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                                <circle cx="4" cy="6" r="2"></circle>
+                                                <circle cx="20" cy="6" r="2"></circle>
+                                                <circle cx="4" cy="18" r="2"></circle>
+                                                <circle cx="20" cy="18" r="2"></circle>
+                                                <line x1="6" y1="6" x2="9" y2="10"></line>
+                                                <line x1="18" y1="6" x2="15" y2="10"></line>
+                                                <line x1="6" y1="18" x2="9" y2="14"></line>
+                                                <line x1="18" y1="18" x2="15" y2="14"></line>
+                                            </svg>
+                                        </span>
                                         <h3>Neural Networks (NN)</h3>
                                     </div>
-                                    <p>The foundation of deep learning — inspired by biological neurons in the brain</p>
+                                    <p>The building blocks of deep learning: interconnected nodes inspired by biological neurons</p>
                                     <div class="nn-types">
                                         <div class="nn-type">
                                             <strong>CNN</strong>
@@ -113,7 +199,7 @@
                                             <span>Recurrent Neural Network</span>
                                             <small>Best for sequences</small>
                                         </div>
-                                        <div class="nn-type">
+                                        <div class="nn-type highlight">
                                             <strong>CRNN</strong>
                                             <span>CNN + RNN Combined</span>
                                             <small>Used in this app!</small>
@@ -131,7 +217,90 @@
                 <p>
                     This OCR application uses <strong>Deep Learning</strong> with <strong>CRNN (Convolutional Recurrent Neural Network)</strong>
                     architecture. It combines CNN for extracting visual features from images and RNN for understanding text sequences.
+                    This is state-of-the-art technology for text recognition.
                 </p>
+            </div>
+        </section>
+
+        <!-- What is OCR -->
+        <section class="section">
+            <h2>What is OCR (Optical Character Recognition)?</h2>
+            <div class="ocr-explanation">
+                <div class="ocr-def-box">
+                    <h3>Definition</h3>
+                    <p>
+                        <strong>OCR (Optical Character Recognition)</strong> is a technology that converts different types of documents
+                        such as scanned paper documents, PDF files, or images captured by a digital camera into editable and searchable data.
+                    </p>
+                </div>
+                <div class="ocr-use-cases">
+                    <h3>Real-World Applications</h3>
+                    <div class="use-case-grid">
+                        <div class="use-case">
+                            <div class="use-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+                            </div>
+                            <strong>Document Digitization</strong>
+                            <span>Convert paper documents to digital text</span>
+                        </div>
+                        <div class="use-case">
+                            <div class="use-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                            </div>
+                            <strong>ID Verification</strong>
+                            <span>Extract data from passports, licenses</span>
+                        </div>
+                        <div class="use-case">
+                            <div class="use-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <strong>Accessibility</strong>
+                            <span>Read text aloud for visually impaired</span>
+                        </div>
+                        <div class="use-case">
+                            <div class="use-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </div>
+                            <strong>Translation</strong>
+                            <span>Extract text for instant translation</span>
+                        </div>
+                        <div class="use-case">
+                            <div class="use-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <strong>License Plate Reading</strong>
+                            <span>Automated parking, toll systems</span>
+                        </div>
+                        <div class="use-case">
+                            <div class="use-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                </svg>
+                            </div>
+                            <strong>Invoice Processing</strong>
+                            <span>Automate data entry from receipts</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -139,7 +308,7 @@
         <section class="section">
             <h2>How OCR Works: Step by Step</h2>
             <p class="section-intro">
-                OCR is a two-stage process: first <strong>detect</strong> where text is located, then <strong>recognize</strong> what the text says.
+                Modern OCR is a two-stage process: first <strong>detect</strong> where text is located, then <strong>recognize</strong> what the text says.
             </p>
 
             <div class="ocr-pipeline">
@@ -157,7 +326,7 @@
                         </svg>
                     </div>
                     <p class="pipeline-desc">User uploads an image containing text</p>
-                    <div class="pipeline-examples">PNG, JPG, PDF, Screenshot</div>
+                    <div class="pipeline-examples">PNG, JPG, Screenshot, Photo</div>
                 </div>
 
                 <div class="pipeline-connector">
@@ -182,8 +351,8 @@
                             <polyline points="2 12 12 17 22 12"></polyline>
                         </svg>
                     </div>
-                    <p class="pipeline-desc">Image is resized and normalized</p>
-                    <div class="pipeline-examples">Resize, Normalize, Convert</div>
+                    <p class="pipeline-desc">Image is resized, normalized, and prepared</p>
+                    <div class="pipeline-examples">Resize, Normalize, Convert to Tensor</div>
                 </div>
 
                 <div class="pipeline-connector">
@@ -210,10 +379,11 @@
                             <rect x="6" y="16" width="8" height="3" stroke-dasharray="2"></rect>
                         </svg>
                     </div>
-                    <p class="pipeline-desc">Find regions containing text</p>
+                    <p class="pipeline-desc">Neural network finds text regions</p>
                     <div class="pipeline-tech">
                         <span class="tech-tag keras">CRAFT</span>
                         <span class="tech-tag doctr">DBNet</span>
+                        <span class="tech-tag paddle">DB/EAST</span>
                     </div>
                 </div>
 
@@ -239,9 +409,10 @@
                             <path d="M12 4v16"></path>
                         </svg>
                     </div>
-                    <p class="pipeline-desc">Convert pixels to characters</p>
+                    <p class="pipeline-desc">Convert visual features to characters</p>
                     <div class="pipeline-tech">
                         <span class="tech-tag crnn">CRNN + CTC</span>
+                        <span class="tech-tag lstm">LSTM</span>
                     </div>
                 </div>
 
@@ -276,7 +447,10 @@
 
         <!-- Neural Network Architecture -->
         <section class="section">
-            <h2>Neural Network Architectures Explained</h2>
+            <h2>Neural Network Architectures in OCR</h2>
+            <p class="section-intro">
+                Different neural network architectures are optimized for different tasks. OCR combines multiple architectures for best results.
+            </p>
 
             <div class="nn-explanation">
                 <div class="nn-card-large">
@@ -286,32 +460,32 @@
                     </div>
                     <div class="nn-card-body">
                         <p class="nn-description">
-                            CNNs are designed to process visual data. They use <strong>convolution operations</strong>
-                            to automatically learn features like edges, shapes, and patterns from images.
+                            CNNs process visual data using <strong>convolution operations</strong> that scan across images
+                            to detect features like edges, shapes, and patterns. Each layer learns increasingly complex features.
                         </p>
                         <div class="nn-how-it-works">
                             <h5>How it works:</h5>
                             <div class="cnn-layers">
                                 <div class="cnn-layer">
                                     <div class="layer-box input">Input</div>
-                                    <span>Raw image pixels</span>
+                                    <span>Raw pixels</span>
                                 </div>
-                                <div class="layer-arrow">→</div>
+                                <div class="layer-arrow">-></div>
                                 <div class="cnn-layer">
-                                    <div class="layer-box conv">Conv</div>
-                                    <span>Detect edges</span>
+                                    <div class="layer-box conv">Conv 1</div>
+                                    <span>Edges</span>
                                 </div>
-                                <div class="layer-arrow">→</div>
+                                <div class="layer-arrow">-></div>
                                 <div class="cnn-layer">
-                                    <div class="layer-box conv">Conv</div>
-                                    <span>Detect shapes</span>
+                                    <div class="layer-box conv">Conv 2</div>
+                                    <span>Shapes</span>
                                 </div>
-                                <div class="layer-arrow">→</div>
+                                <div class="layer-arrow">-></div>
                                 <div class="cnn-layer">
-                                    <div class="layer-box conv">Conv</div>
-                                    <span>Detect patterns</span>
+                                    <div class="layer-box conv">Conv 3</div>
+                                    <span>Patterns</span>
                                 </div>
-                                <div class="layer-arrow">→</div>
+                                <div class="layer-arrow">-></div>
                                 <div class="cnn-layer">
                                     <div class="layer-box output">Features</div>
                                     <span>Visual features</span>
@@ -319,7 +493,7 @@
                             </div>
                         </div>
                         <div class="nn-used-for">
-                            <strong>Used in this app for:</strong> Extracting visual features from text images
+                            <strong>Used in OCR for:</strong> Extracting visual features from text images (strokes, curves, patterns)
                         </div>
                     </div>
                 </div>
@@ -332,7 +506,7 @@
                     <div class="nn-card-body">
                         <p class="nn-description">
                             RNNs process sequential data by maintaining a <strong>memory</strong> of previous inputs.
-                            This makes them ideal for text, where the meaning depends on the order of characters.
+                            This makes them perfect for text, where character order matters (e.g., "cat" vs "act").
                         </p>
                         <div class="nn-how-it-works">
                             <h5>How it works:</h5>
@@ -342,25 +516,25 @@
                                     <div class="cell-input">H</div>
                                     <div class="cell-memory">Memory</div>
                                 </div>
-                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-arrow">-></div>
                                 <div class="rnn-cell">
                                     <div class="cell-box">RNN</div>
                                     <div class="cell-input">e</div>
-                                    <div class="cell-memory">H+Memory</div>
+                                    <div class="cell-memory">H + context</div>
                                 </div>
-                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-arrow">-></div>
                                 <div class="rnn-cell">
                                     <div class="cell-box">RNN</div>
                                     <div class="cell-input">l</div>
-                                    <div class="cell-memory">He+Memory</div>
+                                    <div class="cell-memory">He + context</div>
                                 </div>
-                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-arrow">-></div>
                                 <div class="rnn-cell">
                                     <div class="cell-box">RNN</div>
                                     <div class="cell-input">l</div>
-                                    <div class="cell-memory">Hel+Memory</div>
+                                    <div class="cell-memory">Hel + context</div>
                                 </div>
-                                <div class="rnn-arrow">→</div>
+                                <div class="rnn-arrow">-></div>
                                 <div class="rnn-cell">
                                     <div class="cell-box">RNN</div>
                                     <div class="cell-input">o</div>
@@ -369,7 +543,7 @@
                             </div>
                         </div>
                         <div class="nn-used-for">
-                            <strong>Used in this app for:</strong> Reading character sequences from detected text regions
+                            <strong>Used in OCR for:</strong> Reading character sequences, understanding context and word structure
                         </div>
                     </div>
                 </div>
@@ -381,8 +555,8 @@
                     </div>
                     <div class="nn-card-body">
                         <p class="nn-description">
-                            CRNN combines CNN and RNN to handle the complete OCR task:
-                            CNN extracts visual features, RNN reads the sequence of characters.
+                            <strong>CRNN (Convolutional Recurrent Neural Network)</strong> combines CNN and RNN to handle the complete OCR task:
+                            CNN extracts visual features from images, RNN reads the sequence of characters.
                         </p>
                         <div class="crnn-architecture">
                             <div class="crnn-stage">
@@ -392,7 +566,7 @@
                                     <small>VGG16 / ResNet backbone</small>
                                 </div>
                             </div>
-                            <div class="crnn-arrow">→</div>
+                            <div class="crnn-arrow">-></div>
                             <div class="crnn-stage">
                                 <div class="stage-label">Stage 2: RNN</div>
                                 <div class="stage-box rnn-stage">
@@ -400,7 +574,7 @@
                                     <small>Bidirectional LSTM</small>
                                 </div>
                             </div>
-                            <div class="crnn-arrow">→</div>
+                            <div class="crnn-arrow">-></div>
                             <div class="crnn-stage">
                                 <div class="stage-label">Stage 3: CTC</div>
                                 <div class="stage-box ctc-stage">
@@ -408,6 +582,9 @@
                                     <small>CTC Loss / Decoding</small>
                                 </div>
                             </div>
+                        </div>
+                        <div class="nn-used-for">
+                            <strong>This architecture is used by:</strong> keras-ocr, docTR, and PaddleOCR in this application
                         </div>
                     </div>
                 </div>
@@ -417,28 +594,33 @@
         <!-- Application Architecture -->
         <section class="section diagram-section">
             <h2>Application Architecture</h2>
+            <p class="section-intro">
+                This application is built with a modern web architecture, separating concerns into frontend, backend, and ML layers.
+            </p>
             <div class="modern-architecture">
                 <!-- User/Browser Layer -->
                 <div class="arch-layer user-layer">
                     <div class="layer-header">
-                        <span class="layer-icon">🌐</span>
+                        <span class="layer-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                        </span>
                         <span class="layer-title">Frontend (Browser)</span>
                     </div>
                     <div class="layer-content">
                         <div class="tech-box html">
-                            <span class="tech-icon-small">📄</span>
                             <span>HTML5</span>
                         </div>
                         <div class="tech-box css">
-                            <span class="tech-icon-small">🎨</span>
                             <span>CSS3</span>
                         </div>
                         <div class="tech-box js">
-                            <span class="tech-icon-small">⚡</span>
                             <span>JavaScript</span>
                         </div>
                         <div class="tech-box fetch">
-                            <span class="tech-icon-small">🔄</span>
                             <span>Fetch API</span>
                         </div>
                     </div>
@@ -447,31 +629,33 @@
                 <!-- Arrow -->
                 <div class="arch-arrow">
                     <div class="arrow-line"></div>
-                    <div class="arrow-label">HTTP Request / Response</div>
-                    <div class="arrow-head">▼</div>
+                    <div class="arrow-label">HTTP Request / Response (JSON)</div>
+                    <div class="arrow-head">v</div>
                 </div>
 
                 <!-- Backend Layer -->
                 <div class="arch-layer backend-layer">
                     <div class="layer-header">
-                        <span class="layer-icon">🐍</span>
+                        <span class="layer-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </span>
                         <span class="layer-title">Backend (Python)</span>
                     </div>
                     <div class="layer-content">
                         <div class="tech-box flask">
-                            <span class="tech-icon-small">🌶️</span>
                             <span>Flask</span>
                         </div>
                         <div class="tech-box werkzeug">
-                            <span class="tech-icon-small">⚙️</span>
                             <span>Werkzeug</span>
                         </div>
                         <div class="tech-box pillow">
-                            <span class="tech-icon-small">🖼️</span>
                             <span>Pillow</span>
                         </div>
                         <div class="tech-box ocr-service">
-                            <span class="tech-icon-small">📝</span>
                             <span>OCR Service</span>
                         </div>
                     </div>
@@ -481,13 +665,21 @@
                 <div class="arch-arrow">
                     <div class="arrow-line"></div>
                     <div class="arrow-label">Image Processing</div>
-                    <div class="arrow-head">▼</div>
+                    <div class="arrow-head">v</div>
                 </div>
 
                 <!-- ML Layer -->
                 <div class="arch-layer ml-layer">
                     <div class="layer-header">
-                        <span class="layer-icon">🧠</span>
+                        <span class="layer-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <circle cx="4" cy="6" r="2"></circle>
+                                <circle cx="20" cy="6" r="2"></circle>
+                                <circle cx="4" cy="18" r="2"></circle>
+                                <circle cx="20" cy="18" r="2"></circle>
+                            </svg>
+                        </span>
                         <span class="layer-title">Machine Learning Layer (4 OCR Engines)</span>
                     </div>
                     <div class="layer-content ml-content">
@@ -533,98 +725,47 @@
                 <!-- Output -->
                 <div class="arch-arrow">
                     <div class="arrow-line"></div>
-                    <div class="arrow-label">Extracted Text</div>
-                    <div class="arrow-head">▼</div>
+                    <div class="arrow-label">Extracted Text + Analysis</div>
+                    <div class="arrow-head">v</div>
                 </div>
 
                 <div class="arch-output">
-                    <span class="output-icon">✨</span>
-                    <span class="output-text">OCR Results Comparison</span>
+                    <span class="output-text">OCR Results Comparison (4 Engines)</span>
                 </div>
             </div>
         </section>
 
-        <!-- Technology Stack -->
-        <section class="section">
-            <h2>Technology Stack</h2>
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-icon tensorflow">TF</div>
-                    <h3>TensorFlow</h3>
-                    <p>
-                        Open-source machine learning framework by Google. Provides the computational
-                        backbone for running neural networks efficiently on CPU/GPU.
-                    </p>
-                    <ul class="tech-features">
-                        <li>Automatic differentiation for training</li>
-                        <li>GPU acceleration support</li>
-                        <li>Pre-trained model ecosystem</li>
-                        <li>Production deployment ready</li>
-                    </ul>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-icon flask">Fl</div>
-                    <h3>Flask</h3>
-                    <p>
-                        Lightweight Python web framework. Handles HTTP requests, file uploads,
-                        and serves the web interface with minimal overhead.
-                    </p>
-                    <ul class="tech-features">
-                        <li>Simple and minimalist design</li>
-                        <li>RESTful API support</li>
-                        <li>Jinja2 templating engine</li>
-                        <li>Easy to learn and deploy</li>
-                    </ul>
-                </div>
-
-                <div class="tech-card">
-                    <div class="tech-icon python">Py</div>
-                    <h3>Python</h3>
-                    <p>
-                        The primary programming language. Python's rich ML ecosystem and
-                        readable syntax make it the #1 choice for AI applications.
-                    </p>
-                    <ul class="tech-features">
-                        <li>Rich ML/AI library ecosystem</li>
-                        <li>Easy to read and maintain</li>
-                        <li>Large developer community</li>
-                        <li>Cross-platform support</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- OCR Engines Comparison -->
+        <!-- 4 OCR Engines Comparison -->
         <section class="section">
             <h2>4 OCR Engines Comparison</h2>
             <p class="section-intro">
-                This application uses <strong>4 different OCR engines</strong> to demonstrate how different architectures and frameworks produce different results on the same input.
+                This application uses <strong>4 different OCR engines</strong> to demonstrate how different architectures,
+                frameworks, and training data produce different results on the same input image.
             </p>
 
             <!-- Framework Layer -->
             <div class="frameworks-section">
-                <h3>Underlying Frameworks</h3>
+                <h3>Underlying Deep Learning Frameworks</h3>
                 <div class="frameworks-grid">
                     <div class="framework-card tensorflow">
                         <div class="fw-icon">TF</div>
                         <div class="fw-info">
                             <h4>TensorFlow</h4>
-                            <p>Google's deep learning framework. Powers keras-ocr and docTR.</p>
+                            <p>Google's open-source ML framework. Powers keras-ocr and docTR. Known for production deployment and scalability.</p>
                         </div>
                     </div>
                     <div class="framework-card paddle">
                         <div class="fw-icon">PP</div>
                         <div class="fw-info">
                             <h4>PaddlePaddle</h4>
-                            <p>Baidu's deep learning framework. Powers PaddleOCR.</p>
+                            <p>Baidu's deep learning platform. Powers PaddleOCR. Optimized for Chinese language and industrial applications.</p>
                         </div>
                     </div>
                     <div class="framework-card tesseract-fw">
                         <div class="fw-icon">TS</div>
                         <div class="fw-info">
                             <h4>Tesseract</h4>
-                            <p>Google's classic OCR engine with LSTM neural networks.</p>
+                            <p>Google's classic OCR engine (since 1985). Uses LSTM neural networks. Mature, fast, and supports 100+ languages.</p>
                         </div>
                     </div>
                 </div>
@@ -649,12 +790,17 @@
                             <div class="compare-detail">TensorFlow / Keras</div>
                         </div>
                         <div class="compare-section">
+                            <h5>Training Data</h5>
+                            <div class="compare-detail">Scene text (signs, labels, photos)</div>
+                        </div>
+                        <div class="compare-section">
                             <h5>Characteristics</h5>
                             <ul class="compare-list">
-                                <li class="con">Lowercase only</li>
-                                <li class="con">Limited symbols</li>
-                                <li class="pro">Good for photos</li>
+                                <li class="con">Lowercase only output</li>
+                                <li class="con">Limited symbol support</li>
+                                <li class="con">English only</li>
                                 <li class="pro">Handles rotated text</li>
+                                <li class="pro">Good for photos/signs</li>
                             </ul>
                         </div>
                     </div>
@@ -669,7 +815,7 @@
                         <div class="compare-section">
                             <h5>Architecture</h5>
                             <div class="compare-detail">
-                                <strong>DBNet</strong> detector + <strong>CRNN</strong> recognizer
+                                <strong>DBNet</strong> detector + <strong>CRNN</strong> (VGG16) recognizer
                             </div>
                         </div>
                         <div class="compare-section">
@@ -677,12 +823,17 @@
                             <div class="compare-detail">TensorFlow / PyTorch</div>
                         </div>
                         <div class="compare-section">
+                            <h5>Training Data</h5>
+                            <div class="compare-detail">Documents, structured text</div>
+                        </div>
+                        <div class="compare-section">
                             <h5>Characteristics</h5>
                             <ul class="compare-list">
-                                <li class="pro">Preserves case</li>
-                                <li class="pro">Full punctuation</li>
+                                <li class="pro">Preserves case (A-Z)</li>
+                                <li class="pro">Full punctuation support</li>
                                 <li class="pro">Document optimized</li>
                                 <li class="pro">Actively maintained</li>
+                                <li class="con">English/Latin only</li>
                             </ul>
                         </div>
                     </div>
@@ -702,15 +853,20 @@
                         </div>
                         <div class="compare-section">
                             <h5>Framework</h5>
-                            <div class="compare-detail">Native C++ / Python wrapper</div>
+                            <div class="compare-detail">Native C++ with Python wrapper</div>
+                        </div>
+                        <div class="compare-section">
+                            <h5>Training Data</h5>
+                            <div class="compare-detail">Printed documents, multiple languages</div>
                         </div>
                         <div class="compare-section">
                             <h5>Characteristics</h5>
                             <ul class="compare-list">
-                                <li class="pro">100+ languages</li>
-                                <li class="pro">Very fast</li>
-                                <li class="pro">Mature & stable</li>
-                                <li class="con">Needs preprocessing</li>
+                                <li class="pro">100+ languages supported</li>
+                                <li class="pro">Very fast processing</li>
+                                <li class="pro">Mature and stable</li>
+                                <li class="pro">Chinese + Japanese support</li>
+                                <li class="con">Needs good image quality</li>
                             </ul>
                         </div>
                     </div>
@@ -725,7 +881,7 @@
                         <div class="compare-section">
                             <h5>Architecture</h5>
                             <div class="compare-detail">
-                                <strong>PP-OCRv4</strong> (DB + SVTR)
+                                <strong>PP-OCRv4</strong> (DB detector + SVTR recognizer)
                             </div>
                         </div>
                         <div class="compare-section">
@@ -733,12 +889,17 @@
                             <div class="compare-detail">PaddlePaddle (Baidu)</div>
                         </div>
                         <div class="compare-section">
+                            <h5>Training Data</h5>
+                            <div class="compare-detail">Massive Chinese/multilingual datasets</div>
+                        </div>
+                        <div class="compare-section">
                             <h5>Characteristics</h5>
                             <ul class="compare-list">
-                                <li class="pro">Chinese optimized</li>
+                                <li class="pro">Excellent Chinese support</li>
                                 <li class="pro">80+ languages</li>
                                 <li class="pro">High accuracy</li>
                                 <li class="pro">Active development</li>
+                                <li class="pro">Japanese Kanji support</li>
                             </ul>
                         </div>
                     </div>
@@ -776,7 +937,7 @@
                         <tr>
                             <td><strong>Text Detector</strong></td>
                             <td>CRAFT</td>
-                            <td>DBNet</td>
+                            <td>DBNet (ResNet50)</td>
                             <td>Page segmentation</td>
                             <td>DB / EAST</td>
                         </tr>
@@ -802,25 +963,39 @@
                             <td class="pro">Full</td>
                         </tr>
                         <tr>
-                            <td><strong>Languages</strong></td>
-                            <td class="con">English</td>
-                            <td>English (default)</td>
-                            <td class="pro">100+</td>
-                            <td class="pro">80+</td>
+                            <td><strong>English</strong></td>
+                            <td class="pro">Yes</td>
+                            <td class="pro">Yes</td>
+                            <td class="pro">Yes</td>
+                            <td class="pro">Yes</td>
                         </tr>
                         <tr>
-                            <td><strong>Chinese Support</strong></td>
+                            <td><strong>Chinese</strong></td>
                             <td class="con">No</td>
-                            <td class="con">No (default)</td>
+                            <td class="con">No</td>
                             <td class="pro">Yes</td>
                             <td class="pro">Excellent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Japanese</strong></td>
+                            <td class="con">No</td>
+                            <td class="con">No</td>
+                            <td class="pro">Yes</td>
+                            <td class="pro">Yes (Kanji)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Languages</strong></td>
+                            <td>1</td>
+                            <td>1 (default)</td>
+                            <td class="pro">100+</td>
+                            <td class="pro">80+</td>
                         </tr>
                         <tr>
                             <td><strong>Best For</strong></td>
                             <td>Scene photos</td>
                             <td>Documents</td>
                             <td>Printed text</td>
-                            <td>Multi-language</td>
+                            <td>Chinese/Multi-lang</td>
                         </tr>
                         <tr>
                             <td><strong>Speed</strong></td>
@@ -843,7 +1018,7 @@
                     </div>
                     <div class="insight-content">
                         <h4>Different Frameworks, Different Strengths</h4>
-                        <p>TensorFlow excels at flexibility, PaddlePaddle at Chinese text, and Tesseract at speed. Each framework optimizes for different use cases.</p>
+                        <p>TensorFlow excels at flexibility and deployment, PaddlePaddle at Chinese text recognition, and Tesseract at speed and language coverage. Choose based on your specific needs.</p>
                     </div>
                 </div>
                 <div class="insight-card">
@@ -855,8 +1030,8 @@
                         </svg>
                     </div>
                     <div class="insight-content">
-                        <h4>Training Data Matters</h4>
-                        <p>keras-ocr trained on street signs, docTR on documents, PaddleOCR on Chinese text. This explains why results vary dramatically.</p>
+                        <h4>Training Data Shapes Results</h4>
+                        <p>keras-ocr was trained on street signs, docTR on documents, PaddleOCR on Chinese text. This explains why results vary dramatically between engines on different image types.</p>
                     </div>
                 </div>
                 <div class="insight-card">
@@ -869,8 +1044,8 @@
                         </svg>
                     </div>
                     <div class="insight-content">
-                        <h4>No Perfect Solution</h4>
-                        <p>Each engine has trade-offs. For best results, choose based on your specific use case: documents, photos, speed, or language requirements.</p>
+                        <h4>No Single "Best" Solution</h4>
+                        <p>Each engine has trade-offs. For best results, choose based on your use case: documents (docTR), photos (keras-ocr), speed (Tesseract), or Chinese/Asian languages (PaddleOCR).</p>
                     </div>
                 </div>
             </div>
@@ -881,59 +1056,87 @@
             <h2>Key Terms Glossary</h2>
             <div class="glossary-grid">
                 <div class="glossary-item">
+                    <div class="glossary-term">AI</div>
+                    <div class="glossary-def">
+                        <strong>Artificial Intelligence</strong> - Machines that simulate human intelligence,
+                        including learning, reasoning, and problem-solving.
+                    </div>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">ML</div>
+                    <div class="glossary-def">
+                        <strong>Machine Learning</strong> - Subset of AI where algorithms learn patterns
+                        from data without being explicitly programmed.
+                    </div>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">DL</div>
+                    <div class="glossary-def">
+                        <strong>Deep Learning</strong> - Subset of ML using neural networks with many layers
+                        to learn complex hierarchical representations.
+                    </div>
+                </div>
+                <div class="glossary-item">
                     <div class="glossary-term">OCR</div>
                     <div class="glossary-def">
-                        <strong>Optical Character Recognition</strong> — Technology that converts images
+                        <strong>Optical Character Recognition</strong> - Technology that converts images
                         of text into machine-readable text data.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">CNN</div>
                     <div class="glossary-def">
-                        <strong>Convolutional Neural Network</strong> — Neural network designed for
+                        <strong>Convolutional Neural Network</strong> - Neural network designed for
                         processing images using convolution operations to detect features.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">RNN</div>
                     <div class="glossary-def">
-                        <strong>Recurrent Neural Network</strong> — Neural network with memory,
+                        <strong>Recurrent Neural Network</strong> - Neural network with memory,
                         designed to process sequential data like text or time series.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">LSTM</div>
                     <div class="glossary-def">
-                        <strong>Long Short-Term Memory</strong> — Advanced RNN that can learn
+                        <strong>Long Short-Term Memory</strong> - Advanced RNN that can learn
                         long-term dependencies. Solves the vanishing gradient problem.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">CRNN</div>
                     <div class="glossary-def">
-                        <strong>Convolutional Recurrent Neural Network</strong> — Combines CNN
+                        <strong>Convolutional Recurrent Neural Network</strong> - Combines CNN
                         for feature extraction and RNN for sequence modeling. Used in OCR.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">CTC</div>
                     <div class="glossary-def">
-                        <strong>Connectionist Temporal Classification</strong> — Loss function
+                        <strong>Connectionist Temporal Classification</strong> - Loss function
                         that allows training on unaligned sequence data. Essential for OCR.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">Backbone</div>
                     <div class="glossary-def">
-                        <strong>Feature Extraction Network</strong> — The base CNN (like VGG16 or ResNet)
-                        that extracts features from input images.
+                        <strong>Feature Extraction Network</strong> - The base CNN (like VGG16 or ResNet)
+                        that extracts features from input images before further processing.
                     </div>
                 </div>
                 <div class="glossary-item">
                     <div class="glossary-term">Pre-trained Model</div>
                     <div class="glossary-def">
-                        <strong>Transfer Learning</strong> — A model already trained on large datasets,
+                        <strong>Transfer Learning</strong> - A model already trained on large datasets,
                         which can be used directly or fine-tuned for specific tasks.
+                    </div>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">Tensor</div>
+                    <div class="glossary-def">
+                        <strong>Multi-dimensional Array</strong> - The fundamental data structure in deep learning,
+                        used to represent images, weights, and activations.
                     </div>
                 </div>
             </div>
@@ -944,20 +1147,34 @@
             <h2>Summary</h2>
             <div class="summary-content">
                 <p>
-                    This application demonstrates modern OCR technology using <strong>4 different engines</strong>.
-                    By comparing their results, we can see how different architectures and frameworks produce different results:
+                    This application demonstrates modern OCR technology using <strong>4 different AI-powered engines</strong>,
+                    allowing you to compare how different architectures and training data affect text recognition results.
                 </p>
-                <ul class="summary-list">
-                    <li><strong>keras-ocr</strong> — Best for scene text (signs, labels in photos)</li>
-                    <li><strong>docTR</strong> — Best for structured documents with proper formatting</li>
-                    <li><strong>Tesseract</strong> — Classic OCR, fast, supports 100+ languages</li>
-                    <li><strong>PaddleOCR</strong> — Chinese-optimized, high accuracy, 80+ languages</li>
-                </ul>
+                <div class="summary-highlights">
+                    <div class="highlight-item">
+                        <strong>keras-ocr</strong>
+                        <span>TensorFlow | Scene text (signs, photos)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>docTR</strong>
+                        <span>TensorFlow | Documents, structured text</span>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>Tesseract</strong>
+                        <span>Native | Fast, 100+ languages</span>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>PaddleOCR</strong>
+                        <span>PaddlePaddle | Chinese optimized, 80+ languages</span>
+                    </div>
+                </div>
                 <p>
-                    Powered by <strong>TensorFlow</strong>, <strong>PaddlePaddle</strong>, and <strong>Tesseract</strong> frameworks.
+                    Built with <strong>Python</strong>, <strong>Flask</strong>, <strong>TensorFlow</strong>,
+                    <strong>PaddlePaddle</strong>, and <strong>Tesseract</strong>.
+                    Supports <strong>English</strong>, <strong>Chinese</strong>, and <strong>Japanese</strong>.
                 </p>
                 <div class="summary-cta">
-                    <a href="/" class="try-demo-btn">Try the Demo →</a>
+                    <a href="/" class="try-demo-btn">Try the Demo</a>
                 </div>
             </div>
         </section>
@@ -966,7 +1183,7 @@
 
     <footer class="about-footer">
         <p>Built with TensorFlow, PaddlePaddle, Tesseract, and Flask</p>
-        <p>&copy; Copyright 2026 by <a href="https://github.com/apollosoftdev" target="_blank">ApexSpire</a></p>
+        <p>Copyright 2026 by <a href="https://github.com/apollosoftdev" target="_blank">ApexSpire</a></p>
     </footer>
 </body>
 </html>
