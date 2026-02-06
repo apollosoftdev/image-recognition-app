@@ -244,6 +244,32 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Comparison Chart -->
+                <div class="chart-section" id="chartSection">
+                    <h3>Performance Comparison Chart</h3>
+                    <div class="canvas-chart-container">
+                        <canvas id="comparisonChart" width="800" height="350"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color keras"></div>
+                            <span>keras-ocr</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color doctr"></div>
+                            <span>docTR</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color tesseract"></div>
+                            <span>Tesseract</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color paddleocr"></div>
+                            <span>PaddleOCR</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -376,6 +402,9 @@
                     updateFeatureTag('paddleocrNumbers', data.paddleocr.has_numbers);
                     updateFeatureTag('paddleocrSymbols', data.paddleocr.has_symbols);
 
+                    // Update comparison chart
+                    updateComparisonChart(data);
+
                     resultsSection.style.display = 'block';
                 }
             })
@@ -419,6 +448,270 @@
             loading.style.display = 'none';
             fileInput.value = '';
             imagePreview.src = '';
+        }
+
+        // Smooth Line Chart with Canvas
+        class SmoothLineChart {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.animationProgress = 0;
+                this.data = null;
+                this.colors = {
+                    keras: { line: '#f78166', fill: 'rgba(247, 129, 102, 0.15)' },
+                    doctr: { line: '#3fb950', fill: 'rgba(63, 185, 80, 0.15)' },
+                    tesseract: { line: '#58a6ff', fill: 'rgba(88, 166, 255, 0.15)' },
+                    paddleocr: { line: '#f778ba', fill: 'rgba(247, 120, 186, 0.15)' }
+                };
+                this.metrics = ['Speed', 'Words', 'Lines', 'Chars', 'Confidence'];
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                const container = this.canvas.parentElement;
+                const dpr = window.devicePixelRatio || 1;
+                const rect = container.getBoundingClientRect();
+                this.canvas.width = rect.width * dpr;
+                this.canvas.height = 350 * dpr;
+                this.canvas.style.width = rect.width + 'px';
+                this.canvas.style.height = '350px';
+                this.ctx.scale(dpr, dpr);
+                this.width = rect.width;
+                this.height = 350;
+                if (this.data) this.draw(1);
+            }
+
+            setData(ocrData) {
+                const maxTime = Math.max(
+                    ocrData.keras_ocr.processing_time_ms,
+                    ocrData.doctr.processing_time_ms,
+                    ocrData.tesseract.processing_time_ms,
+                    ocrData.paddleocr.processing_time_ms
+                );
+                const maxWords = Math.max(
+                    ocrData.keras_ocr.word_count,
+                    ocrData.doctr.word_count,
+                    ocrData.tesseract.word_count,
+                    ocrData.paddleocr.word_count,
+                    1
+                );
+                const maxLines = Math.max(
+                    ocrData.keras_ocr.line_count,
+                    ocrData.doctr.line_count,
+                    ocrData.tesseract.line_count,
+                    ocrData.paddleocr.line_count,
+                    1
+                );
+                const maxChars = Math.max(
+                    ocrData.keras_ocr.char_count,
+                    ocrData.doctr.char_count,
+                    ocrData.tesseract.char_count,
+                    ocrData.paddleocr.char_count,
+                    1
+                );
+
+                // Normalize all values to 0-100 scale
+                this.data = {
+                    keras: [
+                        100 - (ocrData.keras_ocr.processing_time_ms / maxTime * 100), // Speed (inverted)
+                        (ocrData.keras_ocr.word_count / maxWords * 100),
+                        (ocrData.keras_ocr.line_count / maxLines * 100),
+                        (ocrData.keras_ocr.char_count / maxChars * 100),
+                        0 // No confidence for keras
+                    ],
+                    doctr: [
+                        100 - (ocrData.doctr.processing_time_ms / maxTime * 100),
+                        (ocrData.doctr.word_count / maxWords * 100),
+                        (ocrData.doctr.line_count / maxLines * 100),
+                        (ocrData.doctr.char_count / maxChars * 100),
+                        ocrData.doctr.avg_confidence || 0
+                    ],
+                    tesseract: [
+                        100 - (ocrData.tesseract.processing_time_ms / maxTime * 100),
+                        (ocrData.tesseract.word_count / maxWords * 100),
+                        (ocrData.tesseract.line_count / maxLines * 100),
+                        (ocrData.tesseract.char_count / maxChars * 100),
+                        ocrData.tesseract.avg_confidence || 0
+                    ],
+                    paddleocr: [
+                        100 - (ocrData.paddleocr.processing_time_ms / maxTime * 100),
+                        (ocrData.paddleocr.word_count / maxWords * 100),
+                        (ocrData.paddleocr.line_count / maxLines * 100),
+                        (ocrData.paddleocr.char_count / maxChars * 100),
+                        ocrData.paddleocr.avg_confidence || 0
+                    ]
+                };
+
+                this.rawData = ocrData;
+                this.animate();
+            }
+
+            animate() {
+                this.animationProgress = 0;
+                const duration = 1500;
+                const startTime = performance.now();
+
+                const step = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    this.animationProgress = Math.min(elapsed / duration, 1);
+                    // Easing function for smooth animation
+                    const eased = 1 - Math.pow(1 - this.animationProgress, 3);
+                    this.draw(eased);
+
+                    if (this.animationProgress < 1) {
+                        requestAnimationFrame(step);
+                    }
+                };
+
+                requestAnimationFrame(step);
+            }
+
+            draw(progress) {
+                const ctx = this.ctx;
+                const padding = { top: 40, right: 30, bottom: 50, left: 60 };
+                const chartWidth = this.width - padding.left - padding.right;
+                const chartHeight = this.height - padding.top - padding.bottom;
+
+                // Clear canvas
+                ctx.clearRect(0, 0, this.width, this.height);
+
+                // Background
+                ctx.fillStyle = '#0d1117';
+                ctx.fillRect(0, 0, this.width, this.height);
+
+                // Grid lines
+                ctx.strokeStyle = '#21262d';
+                ctx.lineWidth = 1;
+
+                // Horizontal grid lines
+                for (let i = 0; i <= 5; i++) {
+                    const y = padding.top + (chartHeight / 5) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(this.width - padding.right, y);
+                    ctx.stroke();
+
+                    // Y-axis labels
+                    ctx.fillStyle = '#6e7681';
+                    ctx.font = '11px Inter, sans-serif';
+                    ctx.textAlign = 'right';
+                    ctx.fillText((100 - i * 20) + '', padding.left - 10, y + 4);
+                }
+
+                // X-axis labels
+                const xStep = chartWidth / (this.metrics.length - 1);
+                ctx.textAlign = 'center';
+                this.metrics.forEach((metric, i) => {
+                    const x = padding.left + i * xStep;
+                    ctx.fillStyle = '#8b949e';
+                    ctx.font = '12px Inter, sans-serif';
+                    ctx.fillText(metric, x, this.height - padding.bottom + 25);
+
+                    // Vertical grid lines
+                    ctx.strokeStyle = '#21262d';
+                    ctx.beginPath();
+                    ctx.moveTo(x, padding.top);
+                    ctx.lineTo(x, this.height - padding.bottom);
+                    ctx.stroke();
+                });
+
+                if (!this.data) return;
+
+                // Draw lines for each engine
+                const engines = ['keras', 'doctr', 'tesseract', 'paddleocr'];
+
+                engines.forEach(engine => {
+                    const values = this.data[engine];
+                    const color = this.colors[engine];
+                    const points = [];
+
+                    // Calculate points
+                    values.forEach((value, i) => {
+                        const x = padding.left + i * xStep;
+                        const animatedValue = value * progress;
+                        const y = padding.top + chartHeight - (animatedValue / 100 * chartHeight);
+                        points.push({ x, y, value: animatedValue });
+                    });
+
+                    // Draw filled area with gradient
+                    ctx.beginPath();
+                    ctx.moveTo(points[0].x, this.height - padding.bottom);
+
+                    // Smooth curve using bezier
+                    for (let i = 0; i < points.length; i++) {
+                        if (i === 0) {
+                            ctx.lineTo(points[i].x, points[i].y);
+                        } else {
+                            const prev = points[i - 1];
+                            const curr = points[i];
+                            const cpx = (prev.x + curr.x) / 2;
+                            ctx.bezierCurveTo(cpx, prev.y, cpx, curr.y, curr.x, curr.y);
+                        }
+                    }
+
+                    ctx.lineTo(points[points.length - 1].x, this.height - padding.bottom);
+                    ctx.closePath();
+
+                    const gradient = ctx.createLinearGradient(0, padding.top, 0, this.height - padding.bottom);
+                    gradient.addColorStop(0, color.fill);
+                    gradient.addColorStop(1, 'rgba(13, 17, 23, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+
+                    // Draw smooth line
+                    ctx.beginPath();
+                    ctx.strokeStyle = color.line;
+                    ctx.lineWidth = 3;
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+
+                    for (let i = 0; i < points.length; i++) {
+                        if (i === 0) {
+                            ctx.moveTo(points[i].x, points[i].y);
+                        } else {
+                            const prev = points[i - 1];
+                            const curr = points[i];
+                            const cpx = (prev.x + curr.x) / 2;
+                            ctx.bezierCurveTo(cpx, prev.y, cpx, curr.y, curr.x, curr.y);
+                        }
+                    }
+                    ctx.stroke();
+
+                    // Draw points
+                    points.forEach((point, i) => {
+                        ctx.beginPath();
+                        ctx.arc(point.x, point.y, 6, 0, Math.PI * 2);
+                        ctx.fillStyle = '#0d1117';
+                        ctx.fill();
+                        ctx.strokeStyle = color.line;
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+
+                        // Inner dot
+                        ctx.beginPath();
+                        ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+                        ctx.fillStyle = color.line;
+                        ctx.fill();
+                    });
+                });
+
+                // Title
+                ctx.fillStyle = '#f0f6fc';
+                ctx.font = 'bold 14px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('OCR Engine Performance Comparison', this.width / 2, 20);
+            }
+        }
+
+        // Initialize chart
+        let comparisonChart = null;
+
+        function updateComparisonChart(data) {
+            if (!comparisonChart) {
+                comparisonChart = new SmoothLineChart('comparisonChart');
+            }
+            comparisonChart.setData(data);
         }
     </script>
 </body>
